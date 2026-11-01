@@ -8,7 +8,9 @@ const transitions = Object.freeze({
     EM_ENTREGA: [],
     ENTREGUE: [], CANCELADO: []
 });
-const paymentDemoAllowed = env => env.DEMO_MODE === 'true' && env.NODE_ENV !== 'production';
+const paymentDemoAllowed = env =>
+    env.DEMO_MODE === 'true' &&
+    (env.NODE_ENV !== 'production' || env.PUBLIC_DEMO_MODE === 'true');
 const nextStatusAllowed = (current, next) => Object.hasOwn(transitions, current) && transitions[current].includes(next);
 const deliveryStatus = Object.freeze({
     CANCELADO: 'CANCELADA', ACEITO: 'PENDENTE', PREPARANDO: 'PREPARANDO', PRONTO_RETIRADA: 'AGUARDANDO_COLETA', EM_ENTREGA: 'A_CAMINHO', ENTREGUE: 'ENTREGUE'

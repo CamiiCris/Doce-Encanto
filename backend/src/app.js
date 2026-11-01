@@ -19,7 +19,7 @@ const { createAdminRouter } = require('./admin');
 const { createPixDemoRouter } = require('./pix-demo');
 const { createFeedbackRouter } = require('./avaliacao');
 const { orderId, listConversation, sendMessage } = require('./conversas');
-const { clientMayConfirmReceipt } = require('./admin-policy');
+const { clientMayConfirmReceipt, paymentDemoAllowed } = require('./admin-policy');
 // Configuração inicial da API.
 const app = express();
 app.disable('x-powered-by');
@@ -110,7 +110,7 @@ app.get('/api/saude', asyncRoute(async (_req, res) => {
         status: 'ok',
         banco: 'conectado',
         pagamentos: 'apenas_simulacao',
-        pix_demo: process.env.DEMO_MODE === 'true' && process.env.NODE_ENV !== 'production'
+        pix_demo: paymentDemoAllowed(process.env)
     });
 }));
 // Cadastro de novos clientes.
