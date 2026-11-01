@@ -1,0 +1,126 @@
+[
+  {
+    "id": "pistache",
+    "name": "Pistache Encantado",
+    "description": "Creme de pistache, pedacinhos crocantes e um sabor irresistível.",
+    "price": 2190,
+    "category": "especiais",
+    "tag": "MAIS AMADO",
+    "color": "green",
+    "rating": "4,9"
+  },
+  {
+    "id": "morango",
+    "name": "Morango dos Sonhos",
+    "description": "Cobertura rosinha, morango fresquinho e muita delicadeza.",
+    "price": 1990,
+    "category": "frutados",
+    "tag": "QUERIDINHO",
+    "color": "pink",
+    "rating": "5,0"
+  },
+  {
+    "id": "chocolate-belga",
+    "name": "Chocolate Belga",
+    "description": "Chocolate intenso com cobertura cremosa e pedacinhos de chocolate.",
+    "price": 2190,
+    "category": "classicos",
+    "tag": "ESPECIAL",
+    "color": "brown",
+    "rating": "4,9"
+  },
+  {
+    "id": "red-velvet",
+    "name": "Red Velvet Dream",
+    "description": "Massa red velvet, creme aveludado e um toque de confeitaria.",
+    "price": 1790,
+    "originalPrice": 1990,
+    "category": "classicos",
+    "tag": "MAIS PEDIDO",
+    "color": "pink",
+    "rating": "5,0"
+  },
+  {
+    "id": "limao",
+    "name": "Doce Limão",
+    "description": "Creme suave, toque cítrico e raspinhas de limão.",
+    "price": 1690,
+    "originalPrice": 1890,
+    "category": "frutados",
+    "tag": "PROMOÇÃO",
+    "color": "green",
+    "rating": "4,8"
+  },
+  {
+    "id": "mirtilo",
+    "name": "Encanto de Mirtilo",
+    "description": "Cobertura lilás cremosa, mirtilos e um toque de doçura.",
+    "price": 2290,
+    "category": "frutados",
+    "tag": "NOVIDADE",
+    "color": "violet",
+    "rating": "4,9"
+  },
+  {
+    "id": "cookies-cream",
+    "name": "Cookies & Cream",
+    "description": "Creme de baunilha e pedacinhos crocantes de biscoito.",
+    "price": 2190,
+    "category": "especiais",
+    "tag": "CROCANTE",
+    "color": "cream",
+    "rating": "4,9"
+  },
+  {
+    "id": "caramelo-biscoito",
+    "name": "Caramelo Crocante",
+    "description": "Caramelo dourado, creme delicado e biscoito crocante.",
+    "price": 1890,
+    "originalPrice": 2190,
+    "category": "especiais",
+    "tag": "PROMOÇÃO",
+    "color": "orange",
+    "rating": "4,8"
+  },
+  {
+    "id": "coco",
+    "name": "Nuvem de Coco",
+    "description": "Cobertura branquinha e coco ralado para adoçar o dia.",
+    "price": 1590,
+    "originalPrice": 1890,
+    "category": "classicos",
+    "tag": "PROMOÇÃO",
+    "color": "cream",
+    "rating": "4,8"
+  },
+  {
+    "id": "maracuja",
+    "name": "Tropical de Maracujá",
+    "description": "Creme tropical e maracujá para um sabor surpreendente.",
+    "price": 2090,
+    "category": "frutados",
+    "tag": "TROPICAL",
+    "color": "orange",
+    "rating": "4,9"
+  },
+  {
+    "id": "smores",
+    "name": "S’mores dos Sonhos",
+    "description": "Chocolate cremoso, marshmallow e farofinha de biscoito.",
+    "price": 2390,
+    "category": "especiais",
+    "tag": "NOVIDADE",
+    "color": "brown",
+    "rating": "4,9"
+  },
+  {
+    "id": "framboesa",
+    "name": "Amor de Framboesa",
+    "description": "Cobertura suave, framboesas e um lindo toque frutado.",
+    "price": 2290,
+    "category": "frutados",
+    "tag": "ROMÂNTICO",
+    "color": "pink",
+    "rating": "4,9"
+  }
+]

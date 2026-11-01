@@ -1,0 +1,26 @@
+{
+  "name": "doce-encanto-api",
+  "version": "4.5.0",
+  "private": true,
+  "description": "Doce Encanto - cliente, administrador e simulacao local de pagamento Pix (sem transferencia real)",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "db:setup": "node src/setup.js",
+    "test": "node --test tests/*.test.js",
+    "check": "node --check src/server.js && node --check src/app.js && node --check src/core.js && node --check src/seed.js && node --check src/demo-users.js && node --check src/admin.js && node --check src/admin-policy.js && node --check src/avaliacao.js && node --check src/pix-demo.js && node --check src/pix-demo-core.js",
+    "demo:users": "node src/demo-users.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "pg": "^8.16.3",
+    "multer": "^2.0.2",
+    "sharp": "^0.34.4",
+    "qrcode": "^1.5.4"
+  }
+}
