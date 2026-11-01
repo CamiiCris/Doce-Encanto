@@ -1,0 +1,28 @@
+# Credenciais e ambiente
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Bibliotecas, cache e logs
+node_modules/
+**/node_modules/
+*.log
+npm-debug.log*
+__pycache__/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Uploads de clientes e dados locais
+frontend/uploads/cupcakes/*
+!frontend/uploads/cupcakes/LEIA-ME.txt
+*.sqlite
+*.db
+pgdata/
+backups/
+*.dump
+*.backup
