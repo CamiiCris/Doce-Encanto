@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fff9f7" />
+    <meta name="description" content="Painel administrativo do projeto acadêmico Doce Encanto." />
+    <title>Administração · Doce Encanto</title>
+    <link rel="icon" type="image/svg+xml" href="assets/doce-encanto-marca.svg" />
+    <link rel="stylesheet" href="admin.css" />
+    <script src="cupcake-visual.js" defer></script>
+    <script src="admin.js" defer></script>
+    <script src="admin-avaliacoes.js" defer></script>
+  </head>
+  <body>
+    <div class="demo-banner">
+      🧁 AMBIENTE ACADÊMICO • Não há cobrança ou rastreamento real • Demonstração de permissões CLIENTE × ADMIN
+    </div>
+    <div id="login-view" class="auth-screen" hidden>
+      <div class="auth-visual">
+        <a href="/" class="brand"><img src="assets/doce-encanto-marca.svg" alt="" /><span>doce <em>encanto</em><small>PAINEL DE ADMINISTRAÇÃO</small></span></a>
+        <h1>
+          Um cantinho para cuidar de cada <em>encanto.</em>
+        </h1>
+        <p>
+          Visualize encomendas, organize a produção e gerencie os sabores em um só lugar.
+        </p>
+        <img class="auth-cupcake" src="assets/cupcakes/pistache.webp" alt="Cupcake de pistache" />
+      </div>
+      <main class="auth-box">
+        <span class="overline">ACESSO RESTRITO</span>
+        <h2>
+          Entrar no painel
+        </h2>
+        <p>
+          Use a conta de <strong>Administrador</strong> criada pelo comando <code>npm.cmd run demo:users</code>.
+        </p>
+        <form id="admin-login-form" class="stack">
+          <label>E-mail administrativo<input id="login-email" type="email" autocomplete="username" required placeholder="admin.demo@doceencanto.test" /></label>
+          <label>Senha<input id="login-password" type="password" autocomplete="current-password" required /></label>
+          <button class="btn primary" type="submit" id="login-submit">Entrar como administrador →</button>
+        </form>
+        <p role="alert" class="error" id="login-error" hidden>
+        </p>
+        <div class="auth-note">
+          ♡ Contas de cliente não podem acessar dados administrativos. As permissões são verificadas no servidor.
+        </div>
+        <a class="text-link" href="/index.html#conta">← Voltar para o site do cliente</a>
+        <button id="reset-session" class="text-link link-button" hidden>Sair da conta atual e trocar de perfil</button>
+      </main>
+    </div>
+    <div id="admin-view" class="dashboard" hidden>
+      <aside class="sidebar">
+        <a class="brand" href="/index.html#inicio"><img src="assets/doce-encanto-marca.svg" alt=""/><span>doce <em>encanto</em><small>ADMINISTRAÇÃO</small></span></a>
+        <p class="sidebar-label">
+          MENU PRINCIPAL
+        </p>
+        <nav aria-label="Navegação do painel">
+          <button class="nav-button active" data-section="inicio"><span>◫</span> Visão geral</button>
+          <button class="nav-button" data-section="pedidos"><span>▤</span> Encomendas</button>
+          <button class="nav-button" data-section="mensagens"><span>▧</span> Mensagens</button>
+          <button class="nav-button" data-section="avaliacoes"><span>★</span> Avaliações</button>
+          <button class="nav-button" data-section="produtos"><span>♧</span> Cupcakes e preços</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <img src="assets/cupcakes/framboesa.webp" alt="" />
+          <p>
+            <strong>Feito para encantar.</strong><br />Do pedido à entrega, com cuidado em cada etapa.
+          </p>
+        </div>
+      </aside>
+      <div class="main-area">
+        <header class="dashboard-topbar">
+          <div>
+            <small>PAINEL DOCE ENCANTO / <span id="breadcrumb">Visão geral</span></small>
+            <h1 id="page-heading">
+              Bom dia, confeitaria! ♡
+            </h1>
+          </div>
+          <div class="user-tools">
+            <span id="admin-name" class="admin-badge">Administrador</span><a href="/index.html#inicio" class="btn outline small">Ver site ↗</a><button id="admin-signout" class="btn outline small">Sair</button>
+          </div>
+        </header>
+        <main class="dashboard-main">
+          <p role="status" id="flash" class="flash" hidden>
+          </p>
+          <section class="panel-section" id="section-inicio">
+            <div class="welcome">
+              <div>
+                <span class="overline">SEU NEGÓCIO, EM UM SÓ LUGAR</span>
+                <h2>
+                  Uma gestão tão doce quanto nossos cupcakes.
+                </h2>
+                <p>
+                  Os números abaixo vêm do PostgreSQL. Valores demonstrativos não representam faturamento real.
+                </p>
+                <button class="btn primary" data-goto="pedidos">Ver encomendas →</button>
+              </div>
+              <img src="assets/cupcakes/morango.webp" alt="Cupcake de morango" />
+            </div>
+            <div class="stats" id="stats">
+              <div class="loading">
+                Carregando indicadores...
+              </div>
+            </div>
+            <div class="panel white">
+              <div class="panel-title">
+                <div>
+                  <span class="overline">ACOMPANHAMENTO</span>
+                  <h2>
+                    Últimas encomendas
+                  </h2>
+                </div>
+                <button class="btn outline small" data-goto="pedidos">Ver todas →</button>
+              </div>
+              <div id="recent-orders" class="table-wrap">
+                <p class="loading">
+                  Carregando...
+                </p>
+              </div>
+            </div>
+            <div class="explanation">
+              <strong>💗 Para a apresentação:</strong> faça um pedido como <b>Cliente</b>, entre também como <b>Admin</b>, registre um pagamento <b>simulado</b> e avance o pedido até sair para entrega; o <b>Cliente confirma o recebimento</b>. Volte ao cliente para visualizar a atualização.
+            </div>
+          </section>
+          <section class="panel-section" id="section-pedidos" hidden>
+            <div class="section-title">
+              <div>
+                <span class="overline">CONTROLE DE ENCOMENDAS</span>
+                <h2>
+                  Pedidos e produção
+                </h2>
+                <p>
+                  Consulte a receita de cada cupcake e atualize o pedido com histórico.
+                </p>
+              </div>
+              <div class="toolbar">
+                <label class="select-label">Situação<select id="order-filter"><option value="TODOS">Todos</option><option value="AGUARDANDO_PAGAMENTO">Aguardando pagamento</option><option value="CONFIRMADO">Pedido feito</option><option value="ACEITO">Pedido aceito</option><option value="PREPARANDO">Preparando</option><option value="PRONTO_RETIRADA">Aguardando motoboy</option><option value="EM_ENTREGA">Indo até você</option><option value="ENTREGUE">Entregues</option><option value="CANCELADO">Cancelados</option></select></label><button class="btn outline small" id="refresh-orders">↻ Atualizar</button>
+              </div>
+            </div>
+            <div class="panel white">
+              <div id="all-orders" class="table-wrap">
+                <p class="loading">
+                  Carregando pedidos...
+                </p>
+              </div>
+            </div>
+          </section>
+          <section class="panel-section" id="section-mensagens" hidden>
+            <div class="section-title">
+              <div>
+                <span class="overline">ATENDIMENTO</span>
+                <h2>
+                  Conversas com clientes
+                </h2>
+                <p>
+                  Converse por pedido. As mensagens ficam registradas no PostgreSQL.
+                </p>
+              </div>
+              <button class="btn outline small" id="refresh-messages" type="button">Atualizar</button>
+            </div>
+            <div class="admin-chat-layout">
+              <aside class="panel white admin-chat-list" aria-label="Pedidos com mensagens">
+                <h3>
+                  Escolha um pedido
+                </h3>
+                <div id="admin-chat-orders">
+                </div>
+              </aside>
+              <div class="panel white admin-chat-main">
+                <h3 id="admin-chat-title">
+                  Selecione um pedido
+                </h3>
+                <p class="conversation-help">
+                  Mensagens e avisos sobre esta encomenda.
+                </p>
+                <div class="admin-conversation" id="admin-conversation" aria-live="polite">
+                </div>
+                <form id="admin-message-form" class="form-grid" hidden>
+                  <label for="admin-message-input">Mensagem para o cliente
+                    <textarea id="admin-message-input" required minlength="2" maxlength="1000" rows="3" placeholder="Escreva sua resposta..."></textarea>
+                  </label>
+                  <button class="btn primary" type="submit">Enviar mensagem</button>
+                </form>
+                <form id="notice-form" class="form-grid admin-chat-notice-form" hidden>
+                  <h4>
+                    Enviar comunicado
+                  </h4>
+                  <label>Tipo de aviso<select name="tipo" required>
+                      <option value="ATRASO">Atraso na encomenda</option>
+                      <option value="FALTA_PRODUTO">Produto em falta</option>
+                      <option value="PROPOSTA_TROCA">Proposta de troca</option>
+                    </select></label>
+                  <label>Mensagem<textarea name="mensagem" required minlength="8" maxlength="500" placeholder="Explique a situação para o cliente."></textarea></label>
+                  <label>Nova previsão (opcional)<input name="novaPrevisao" type="datetime-local"></label>
+                  <button class="btn outline" type="submit">Enviar aviso</button>
+                </form>
+              </div>
+            </div>
+          </section>
+          <section class="panel-section" id="section-avaliacoes" hidden>
+            <div class="section-title"><div><span class="overline">PESQUISA DE USABILIDADE</span><h2>Avaliações recebidas</h2><p>Respostas anônimas dos usuários que testaram o protótipo.</p></div>
+              <button id="refresh-feedback" class="btn outline small" type="button">Atualizar avaliações</button></div>
+            <div class="panel white"><div id="feedback-summary" class="loading">Selecione a seção para carregar.</div><div id="feedback-items"></div></div>
+          </section>
+          <section class="panel-section" id="section-produtos" hidden>
+            <div class="section-title">
+              <div>
+                <span class="overline">NOSSA VITRINE</span>
+                <h2>
+                  Sabores e cardápio
+                </h2>
+                <p>
+                  Altere o preço, a descrição e a disponibilidade que aparecem para os clientes.
+                </p>
+              </div>
+              <button class="btn primary" id="new-product">+ Cadastrar cupcake</button>
+            </div>
+            <div class="panel white">
+              <div id="all-products" class="product-list">
+                <p class="loading">
+                  Carregando produtos...
+                </p>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <div id="drawer-backdrop" class="drawer-backdrop" hidden>
+    </div>
+    <aside id="detail-drawer" class="detail-drawer" aria-labelledby="drawer-title" aria-hidden="true" tabindex="-1">
+      <div class="drawer-heading">
+        <div>
+          <span class="overline" id="drawer-overline">DOCE ENCANTO</span>
+          <h2 id="drawer-title">
+            Detalhes
+          </h2>
+        </div>
+        <button class="close-button" id="close-drawer" aria-label="Fechar detalhes">×</button>
+      </div>
+      <div id="drawer-content" class="drawer-content">
+      </div>
+    </aside>
+  </body>
+</html>

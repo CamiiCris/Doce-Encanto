@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fff9f7" />
+    <meta name="description" content="Doce Encanto: cupcakes artesanais feitos com carinho. Escolha seu sabor favorito ou monte o seu próprio cupcake." />
+    <title>Doce Encanto · Cupcakes artesanais</title>
+    <link rel="icon" type="image/svg+xml" href="assets/doce-encanto-marca.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="cupcake-visual.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <svg aria-hidden="true" class="icon-sprite" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="i-bag" viewBox="0 0 24 24"><path d="M4 8h16l-1 12H5L4 8Zm4 1V7a4 4 0 0 1 8 0v2"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 8.4c0 4-8.8 10.8-8.8 10.8S3.2 12.4 3.2 8.4a4.8 4.8 0 0 1 8.8-2.5 4.8 4.8 0 0 1 8.8 2.5Z"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13M10 10v7m4-7v7"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3 6.5 7 .9-5 5 .9 7-5.9-3.4L6.1 21l.9-6.6-5-5 7-.9L12 2Z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+      <symbol id="i-truck" viewBox="0 0 24 24"><path d="M3 5h12v12H3V5Zm12 4h4l3 4v4h-7V9ZM7 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0Zm10 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5.5-8 12-8 12S4 15.5 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 20 5v6c0 5-3 8.5-8 11-5-2.5-8-6-8-11V5l8-3Z"/><path d="m9 12 2 2 4-5"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 3-7 8-7s8 2 8 7"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 4h16v13H9l-5 4V4Z"/><path d="M8 9h8M8 13h5"/></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2c1 6 4 9 10 10-6 1-9 4-10 10-1-6-4-9-10-10 6-1 9-4 10-10Z"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    </svg>
+    <div class="announcement">
+      <span>✨ Uma dose de encanto no seu dia</span> <span class="announcement-dot">•</span> Use <strong>DOCE10</strong> e ganhe 10% de desconto na primeira compra <span class="announcement-dot">•</span> <span>Feito com carinho 💗</span>
+    </div>
+    <!-- Cabeçalho e navegação -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#inicio" aria-label="Doce Encanto — início" data-nav="inicio"><span class="brand-icon"><img src="assets/doce-encanto-marca.svg" alt="" /></span><span class="brand-text">doce<span>encanto</span><small>CONFEITARIA ARTESANAL</small></span></a>
+        <nav class="nav" id="main-nav" aria-label="Navegação principal">
+          <a href="#inicio" data-nav="inicio" class="active">Início</a>
+          <a href="#catalogo" data-nav="catalogo">Catálogo</a>
+          <a href="#monte" data-nav="monte">Monte seu cupcake</a>
+          <a href="#acompanhar" data-nav="acompanhar">Acompanhar pedido</a>
+          <a href="#mensagens" data-nav="mensagens">Mensagens</a>
+          <a href="#conta" data-nav="conta" class="mobile-account-link">Minha conta</a>
+        </nav>
+        <div class="header-actions">
+          <button class="icon-button desktop-icon" id="search-trigger" aria-label="Pesquisar no catálogo" title="Pesquisar"><svg><use href="#i-search"/></svg></button>
+          <button class="icon-button desktop-icon" data-action="account" aria-label="Minha conta" title="Minha conta"><svg><use href="#i-user"/></svg></button>
+          <button class="icon-button cart-trigger" data-action="cart" aria-label="Abrir carrinho"><svg><use href="#i-bag"/></svg><span class="cart-badge" id="cart-count" hidden>0</span></button>
+          <button class="icon-button mobile-menu-button" id="mobile-menu-button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav"><svg><use href="#i-menu"/></svg></button>
+        </div>
+      </div>
+    </header>
+    <!-- Conteúdo principal -->
+    <main id="main-content">
+      <section class="page active" id="page-inicio" aria-label="Página inicial">
+        <section class="home-carousel" id="home-carousel" aria-label="Carrossel de novidades Doce Encanto">
+          <div class="carousel-window" id="carousel-window">
+            <article class="carousel-slide is-active" data-title="Boas-vindas">
+              <img src="assets/banners/boas-vindas.webp" alt="" fetchpriority="high" />
+              <div class="carousel-mobile-content">
+                <span class="carousel-eyebrow">DOCE ENCANTO</span>
+                <h2>
+                  Boas-vindas ao Doce Encanto!
+                </h2>
+                <p>
+                  Cupcakes artesanais para adoçar os seus melhores momentos.
+                </p>
+                <span class="mobile-slide-cta">Ver catálogo →</span>
+              </div>
+              <a href="#catalogo" class="carousel-slide-link" aria-label="Boas-vindas: Ver catálogo"></a>
+            </article>
+            <article class="carousel-slide" data-title="Monte seu cupcake" hidden>
+              <img src="assets/banners/monte-seu-cupcake.webp" alt="" loading="lazy" />
+              <div class="carousel-mobile-content">
+                <span class="carousel-eyebrow">DOCE ENCANTO</span>
+                <h2>
+                  Do seu jeito, do seu sabor.
+                </h2>
+                <p>
+                  Escolha massa, recheio e cobertura e crie uma combinação única.
+                </p>
+                <span class="mobile-slide-cta">Montar meu cupcake →</span>
+              </div>
+              <a href="#monte" class="carousel-slide-link" aria-label="Monte seu cupcake: Montar meu cupcake"></a>
+            </article>
+            <article class="carousel-slide" data-title="Sabores especiais" hidden>
+              <img src="assets/banners/sabores-especiais.webp" alt="" loading="lazy" />
+              <div class="carousel-mobile-content">
+                <span class="carousel-eyebrow">DOCE ENCANTO</span>
+                <h2>
+                  Sabores que encantam.
+                </h2>
+                <p>
+                  Pistache, limão e maracujá para surpreender.
+                </p>
+                <span class="mobile-slide-cta">Conhecer sabores →</span>
+              </div>
+              <a href="#catalogo" class="carousel-slide-link" aria-label="Sabores especiais: Conhecer sabores"></a>
+            </article>
+            <article class="carousel-slide" data-title="Sweet News" hidden>
+              <img src="assets/banners/sweet-news.webp" alt="" loading="lazy" />
+              <div class="carousel-mobile-content">
+                <span class="carousel-eyebrow">DOCE ENCANTO</span>
+                <h2>
+                  Novidades quentinhas!
+                </h2>
+                <p>
+                  Descubra os cupcakes que chegaram à nossa vitrine.
+                </p>
+                <span class="mobile-slide-cta">Ver novidades →</span>
+              </div>
+              <a href="#catalogo" class="carousel-slide-link" aria-label="Sweet News: Ver novidades"></a>
+            </article>
+            <article class="carousel-slide" data-title="Os queridinhos" hidden>
+              <img src="assets/banners/queridinhos.webp" alt="" loading="lazy" />
+              <div class="carousel-mobile-content">
+                <span class="carousel-eyebrow">DOCE ENCANTO</span>
+                <h2>
+                  Os queridinhos da nossa vitrine.
+                </h2>
+                <p>
+                  Escolhas que conquistam quem ama um docinho.
+                </p>
+                <span class="mobile-slide-cta">Ver queridinhos →</span>
+              </div>
+              <a href="#catalogo" class="carousel-slide-link" aria-label="Os queridinhos: Ver queridinhos"></a>
+            </article>
+            <article class="carousel-slide" data-title="Doce Club" hidden>
+              <img src="assets/banners/doce-club.webp" alt="" loading="lazy" />
+              <div class="carousel-mobile-content">
+                <span class="carousel-eyebrow">DOCE ENCANTO</span>
+                <h2>
+                  Mais doçura, mais vantagens.
+                </h2>
+                <p>
+                  Conheça a experiência Doce Encanto e seu cantinho de pedidos.
+                </p>
+                <span class="mobile-slide-cta">Conhecer o clube →</span>
+              </div>
+              <a href="#conta" class="carousel-slide-link" aria-label="Doce Club: Conhecer o clube"></a>
+            </article>
+          </div>
+          <button type="button" class="carousel-arrow carousel-arrow-prev" id="carousel-prev" aria-label="Destaque anterior">&#10094;</button>
+          <button type="button" class="carousel-arrow carousel-arrow-next" id="carousel-next" aria-label="Próximo destaque">&#10095;</button>
+          <div class="carousel-dots" id="carousel-dots" aria-label="Selecionar destaque">
+          </div>
+          <div class="sr-only" id="carousel-status" aria-live="polite">
+          </div>
+        </section>
+        <section class="benefits container" aria-label="Diferenciais">
+          <div>
+            <span class="benefit-icon"><svg><use href="#i-heart"/></svg></span>
+            <p>
+              <strong>Feitos com amor</strong><small>Cada detalhe é especial</small>
+            </p>
+          </div>
+          <div>
+            <span class="benefit-icon"><svg><use href="#i-truck"/></svg></span>
+            <p>
+              <strong>Entrega com carinho</strong><small>Do forno até você</small>
+            </p>
+          </div>
+          <div>
+            <span class="benefit-icon"><svg><use href="#i-sparkle"/></svg></span>
+            <p>
+              <strong>Seu doce, seu jeito</strong><small>Personalize cada mordida</small>
+            </p>
+          </div>
+        </section>
+        <div class="home-collection-intro container">
+          <span class="section-kicker">EXPLORE NOSSA VITRINE</span>
+          <h2>
+            Pequenos momentos, <em>grandes encantos</em>
+          </h2>
+          <p>
+            Escolha pelo que você está procurando hoje ♡
+          </p>
+          <nav aria-label="Ir para uma seleção de cupcakes" class="home-collection-pills">
+            <a href="#mais-pedidos">Mais pedidos</a><a href="#novidades">Novidades</a><a href="#baratinhos">Baratinhos da semana</a><a href="#promocoes">Promoções</a>
+          </nav>
+        </div>
+        <section class="product-section home-collection container" id="mais-pedidos" aria-label="Mais pedidos">
+          <div class="section-heading">
+            <div>
+              <span class="section-kicker">OS QUERIDINHOS</span>
+              <h2>
+                Mais <em>pedidos</em> <span>♡</span>
+              </h2>
+              <p>
+                Os sabores que são puro sucesso na nossa seleção.
+              </p>
+            </div>
+            <a class="text-link" href="#catalogo">Ver cardápio completo <svg><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="product-grid" id="home-populares">
+          </div>
+        </section>
+        <section class="product-section home-collection home-collection-soft" id="novidades" aria-label="Novidades">
+          <div class="container collection-content">
+            <img class="collection-doodle doodle-news" src="assets/red-velvet.svg" alt="" loading="lazy"/>
+            <div class="section-heading">
+              <div>
+                <span class="section-kicker">ACABARAM DE CHEGAR</span>
+                <h2>
+                  Novidades <em>docinhas</em> <span>✦</span>
+                </h2>
+                <p>
+                  Novos sabores para você se apaixonar.
+                </p>
+              </div>
+              <a class="text-link" href="#catalogo">Explorar novidades <svg><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="product-grid" id="home-novidades">
+            </div>
+          </div>
+        </section>
+        <section class="product-section home-collection container" id="baratinhos" aria-label="Baratinhos da semana">
+          <div class="section-heading">
+            <div>
+              <span class="section-kicker">DOÇURA QUE CABE NO BOLSO</span>
+              <h2>
+                Baratinhos <em>da semana</em> <span>♡</span>
+              </h2>
+              <p>
+                Uma seleção de cupcakes com preços mais leves.
+              </p>
+            </div>
+            <a class="text-link" href="#catalogo">Ver todos <svg><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="product-grid" id="home-baratinhos">
+          </div>
+        </section>
+        <section class="product-section home-collection home-collection-sale" id="promocoes" aria-label="Promoções">
+          <div class="container collection-content">
+            <img class="collection-doodle doodle-sale" src="assets/pistache.svg" alt="" loading="lazy"/>
+            <div class="section-heading">
+              <div>
+                <span class="section-kicker">OPORTUNIDADES ENCANTADORAS</span>
+                <h2>
+                  Promoções <em>especiais</em> <span>✦</span>
+                </h2>
+                <p>
+                  Ofertas e preços ilustrativos para conhecer o layout.
+                </p>
+              </div>
+              <a class="text-link" href="#catalogo">Ver cardápio <svg><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="product-grid" id="home-promocoes">
+            </div>
+          </div>
+        </section>
+        <section class="first-order-promo" aria-labelledby="first-order-title">
+          <div class="container first-order-inner">
+            <div class="first-order-copy">
+              <span class="section-kicker">UM MIMO DE BOAS-VINDAS</span>
+              <h2 id="first-order-title">
+                A primeira compra merece <em>mais encanto!</em>
+              </h2>
+              <p>
+                Ganhe <strong>10% OFF</strong> na sua primeira encomenda registrada.
+              </p>
+              <div class="promo-actions">
+                <button class="promo-code" id="copy-coupon" type="button" aria-label="Copiar cupom DOCE10">DOCE10 <span>Copiar cupom ❐</span></button><a class="button button-primary" href="#catalogo">Escolher meus cupcakes <svg><use href="#i-arrow"/></svg></a>
+              </div>
+              <small>* Validação por conta cadastrada; o desconto será conferido no servidor.</small>
+            </div>
+            <img class="first-order-illustration" src="assets/kinder-bliss.svg" alt="Ilustração de cupcake em tons cremosos" loading="lazy" />
+          </div>
+        </section>
+        <section class="builder-banner">
+          <div class="container banner-grid">
+            <div class="banner-copy">
+              <div class="section-kicker">
+                UM DOCE EXCLUSIVO PARA VOCÊ
+              </div>
+              <h2>
+                Que tal criar o seu <em>próprio encanto?</em>
+              </h2>
+              <p>
+                Escolha a massa, o recheio e a cobertura. Nós cuidamos do resto — e do amor em cada detalhe.
+              </p>
+              <a class="button button-primary" href="#monte" data-nav="monte">Montar meu cupcake <svg><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="banner-art banner-art-illustrated">
+              <img src="assets/pistache.svg" alt="Desenho de cupcake com cobertura de pistache"/>
+              <div class="banner-note">
+                ♡ feito do seu jeitinho
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="testimonials container">
+          <div class="center-heading">
+            <span class="section-kicker">PALAVRINHAS DOCES</span>
+            <h2>
+              Quem prova, <em>se encanta</em>
+            </h2>
+          </div>
+          <div class="testimonial-grid">
+            <article class="review-card">
+              <span class="review-stars">★★★★★</span>
+              <p>
+                “Os cupcakes são lindos e deliciosos! Dá para sentir o carinho em cada detalhe.”
+              </p>
+              <div class="review-person">
+                🌸 <span><strong>Mariana S.</strong><small>Cliente encantada</small></span>
+              </div>
+            </article>
+            <article class="review-card">
+              <span class="review-stars">★★★★★</span>
+              <p>
+                “Montei meu próprio cupcake e amei o resultado. Já quero experimentar todos os sabores!”
+              </p>
+              <div class="review-person">
+                💗 <span><strong>Ana L.</strong><small>Cliente encantada</small></span>
+              </div>
+            </article>
+            <article class="review-card">
+              <span class="review-stars">★★★★★</span>
+              <p>
+                “Um presente super especial. A apresentação é delicada e o sabor maravilhoso.”
+              </p>
+              <div class="review-person">
+                🌷 <span><strong>Juliana R.</strong><small>Cliente encantada</small></span>
+              </div>
+            </article>
+          </div>
+          <p class="demo-footnote">
+            Depoimentos ilustrativos usados apenas para demonstrar o layout.
+          </p>
+        </section>
+      </section>
+      <section class="page" id="page-catalogo" aria-label="Catálogo de cupcakes">
+        <div class="page-heading">
+          <div class="container">
+            <span class="section-kicker">NOSSA VITRINE DE DOCES</span>
+            <h1>
+              Um mundo de <em>sabores</em>
+            </h1>
+            <p>
+              Escolha seu favorito. Cada um é especial à sua maneira.
+            </p>
+          </div>
+        </div>
+        <section class="container catalog-layout">
+          <aside class="catalog-sidebar">
+            <div class="sidebar-title">
+              Filtrar sabores <svg><use href="#i-sparkle"/></svg>
+            </div>
+            <label class="field-label" for="catalog-search">O que você procura?</label>
+            <div class="search-field">
+              <svg><use href="#i-search"/></svg><input id="catalog-search" type="search" placeholder="Ex.: chocolate, morango..." />
+            </div>
+            <div class="filter-title">
+              Categorias
+            </div>
+            <div class="category-filters" id="category-filters">
+            </div>
+            <div class="sidebar-note">
+              🍰 <strong>Não encontrou seu sabor?</strong>
+              <p>
+                Monte um cupcake com a sua combinação favorita.
+              </p>
+              <a href="#monte" data-nav="monte">Criar meu cupcake →</a>
+            </div>
+          </aside>
+          <div class="catalog-main">
+            <div class="catalog-toolbar">
+              <strong id="product-result-count">12 delícias encontradas</strong><label>Ordenar por <select id="sort-select" aria-label="Ordenação dos produtos"><option value="featured">Mais amados</option><option value="price-asc">Menor preço</option><option value="price-desc">Maior preço</option><option value="name">Nome A–Z</option></select></label>
+            </div>
+            <div class="product-grid catalog-products" id="catalog-products">
+            </div>
+            <div class="catalog-empty hidden" id="catalog-empty">
+              <span>🧁</span>
+              <h3>
+                Nenhum cupcake encontrado
+              </h3>
+              <p>
+                Tente pesquisar outro sabor ou selecionar uma nova categoria.
+              </p>
+              <button class="button button-primary" id="clear-filters">Limpar filtros</button>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section class="page" id="page-monte" aria-label="Monte seu cupcake">
+        <div class="page-heading builder-heading">
+          <div class="container">
+            <span class="section-kicker">SEJA A CONFEITEIRA DO SEU ENCANTO</span>
+            <h1>
+              Monte seu <em>cupcake</em> ♡
+            </h1>
+            <p>
+              Um sabor único, feito exatamente do seu jeitinho.
+            </p>
+          </div>
+        </div>
+        <div class="container builder-layout">
+          <div class="builder-form">
+            <div class="builder-intro">
+              <div class="builder-intro-icon">
+                ✨
+              </div>
+              <div>
+                <h2>
+                  Vamos criar uma delícia?
+                </h2>
+                <p>
+                  Três escolhas simples para um doce com a sua cara!
+                </p>
+              </div>
+            </div>
+            <div class="builder-progress">
+              <span class="progress-line"></span><span class="progress-step selected">1</span><span class="progress-step selected">2</span><span class="progress-step selected">3</span>
+            </div>
+            <div class="builder-step">
+              <div class="builder-step-title">
+                <span>01</span>
+                <div>
+                  <h3>
+                    Escolha a massa
+                  </h3>
+                  <p>
+                    A base perfeita para sua criação.
+                  </p>
+                </div>
+              </div>
+              <div class="choice-grid" id="choice-massa">
+              </div>
+            </div>
+            <div class="builder-step">
+              <div class="builder-step-title">
+                <span>02</span>
+                <div>
+                  <h3>
+                    Escolha o recheio
+                  </h3>
+                  <p>
+                    O segredo mais gostoso fica por dentro.
+                  </p>
+                </div>
+              </div>
+              <div class="choice-grid" id="choice-recheio">
+              </div>
+            </div>
+            <div class="builder-step">
+              <div class="builder-step-title">
+                <span>03</span>
+                <div>
+                  <h3>
+                    Escolha a cobertura
+                  </h3>
+                  <p>
+                    O toque final de pura felicidade.
+                  </p>
+                </div>
+              </div>
+              <div class="choice-grid" id="choice-cobertura">
+              </div>
+            </div>
+          </div>
+          <aside class="builder-preview">
+            <div class="builder-preview-sticky">
+              <span class="builder-preview-kicker">SUA CRIAÇÃO ESPECIAL</span>
+              <h2>
+                Meu doce encanto <span>♡</span>
+              </h2>
+              <div class="preview-art">
+                <span class="preview-sparkle one">✦</span><span class="preview-sparkle two">✧</span><img id="builder-image" src="assets/cupcakes/morango.webp" alt="Ilustração do cupcake com as escolhas de massa, recheio e cobertura" />
+              </div>
+              <div class="preview-summary" id="builder-summary">
+              </div>
+              <div class="preview-price">
+                <div>
+                  <small>Seu cupcake por</small><strong id="builder-price">R$ 16,90</strong>
+                </div>
+                <span>Feito só para você</span>
+              </div>
+              <button class="button button-primary full-width" id="builder-add">Adicionar ao carrinho <svg><use href="#i-bag"/></svg></button>
+              <p class="preview-hint">
+                ♡ Você pode criar quantos sabores quiser<br><span>Prévia ilustrada em camadas com sua combinação exata. O produto real pode variar.</span>
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+      <section class="page" id="page-checkout" aria-label="Finalizar pedido">
+        <div class="page-heading small-heading">
+          <div class="container">
+            <span class="section-kicker">FALTA POUQUINHO</span>
+            <h1>
+              Finalizar <em>pedido</em>
+            </h1>
+            <p>
+              Confira os detalhes para levar seus encantos até você.
+            </p>
+          </div>
+        </div>
+        <div class="container checkout-layout">
+          <form id="checkout-form" class="checkout-form" novalidate>
+            <div class="checkout-box">
+              <div class="box-title">
+                <span class="title-number">1</span>
+                <h2>
+                  Seus dados
+                </h2>
+              </div>
+              <div class="form-grid">
+                <label class="form-field">Nome completo <input name="nome" type="text" required autocomplete="name" placeholder="Como podemos te chamar?" /></label><label class="form-field">E-mail <input name="email" type="email" required autocomplete="email" placeholder="voce@exemplo.com" /></label><label class="form-field">Telefone <input name="telefone" type="tel" required autocomplete="tel" placeholder="(00) 00000-0000" /></label><label class="form-field">CEP <input name="cep" type="text" required inputmode="numeric" maxlength="9" autocomplete="postal-code" placeholder="00000-000" /></label>
+              </div>
+            </div>
+            <div class="checkout-box">
+              <div class="box-title">
+                <span class="title-number">2</span>
+                <h2>
+                  Endereço de entrega
+                </h2>
+              </div>
+              <div class="form-grid">
+                <label class="form-field form-wide">Rua / avenida <input name="rua" type="text" required autocomplete="address-line1" placeholder="Nome da rua" /></label><label class="form-field">Número <input name="numero" type="text" required placeholder="Nº" /></label><label class="form-field">Complemento <input name="complemento" type="text" placeholder="Apto, bloco (opcional)" /></label><label class="form-field">Bairro <input name="bairro" type="text" required placeholder="Seu bairro" /></label><label class="form-field">Cidade <input name="cidade" type="text" required autocomplete="address-level2" placeholder="Sua cidade" /></label><label class="form-field">UF <input name="uf" type="text" required minlength="2" maxlength="2" autocomplete="address-level1" placeholder="PR" /></label>
+              </div>
+            </div>
+            <div class="checkout-box">
+              <div class="box-title">
+                <span class="title-number">3</span>
+                <h2>
+                  Preferência de pagamento <span class="demo-label">Modo demonstração</span>
+                </h2>
+              </div>
+              <div class="payment-choices">
+                <label><input type="radio" name="pagamento" value="PIX" checked /><span class="radio-card"><strong>◆ PIX</strong><small>QR Code e copia e cola de teste</small></span></label><label><input type="radio" name="pagamento" value="CARTAO" /><span class="radio-card"><strong>▭ Cartão</strong><small>Sem dados reais do cartão</small></span></label>
+              </div>
+              <p class="payment-disclaimer">
+                Pix demonstrativo disponível com DEMO_MODE=true. O QR Code não é bancário e nenhuma transferência será realizada. Cartão continua somente como intenção de pagamento.
+              </p>
+            </div>
+            <button class="button button-primary full-width checkout-submit" type="submit">Registrar meu pedido <svg><use href="#i-arrow"/></svg></button>
+            <p id="checkout-error" class="form-error" role="alert" hidden>
+            </p>
+          </form>
+          <aside class="checkout-summary checkout-box">
+            <div class="box-title">
+              <h2>
+                Resumo do seu pedido
+              </h2>
+            </div>
+            <div id="checkout-items">
+            </div>
+            <div class="coupon-row">
+              <label for="coupon-code">Tem um cupom?</label>
+              <div>
+                <input id="coupon-code" type="text" placeholder="Código do cupom"/><button id="apply-coupon" type="button">Aplicar</button>
+              </div>
+              <small id="coupon-feedback" aria-live="polite"></small>
+            </div>
+            <div id="checkout-totals">
+            </div>
+            <p class="secure-note">
+              <svg><use href="#i-shield"/></svg> Seus dados são enviados à API local. A simulação não movimenta dinheiro.
+            </p>
+          </aside>
+        </div>
+      </section>
+      <section class="page" id="page-pix" aria-label="Pix de demonstração">
+        <div class="container pix-demo-wrap">
+          <div class="pix-head">
+            <span class="section-kicker">💗 DOCE ENCANTO · PAGAMENTO DIDÁTICO</span>
+            <h1>
+              Seu docinho está <em>quase pronto!</em>
+            </h1>
+            <p>
+              Veja como seria uma tela de pagamento Pix — sem cobrança de verdade.
+            </p>
+          </div>
+          <div class="pix-grid">
+            <div class="pix-demo-card">
+              <div class="pix-demo-ribbon">
+                🧪 PIX DE DEMONSTRAÇÃO · NÃO PAGÁVEL
+              </div>
+              <h2>
+                Escaneie o QR Code
+              </h2>
+              <p class="pix-note">
+                Somente para ilustrar o pagamento. <strong>Não use aplicativos bancários.</strong>
+              </p>
+              <div class="pix-qr-frame" id="pix-qr-frame">
+                <div class="pix-loading">
+                  Preparando QR Code de teste…
+                </div>
+              </div>
+              <div class="pix-amount">
+                <span>Valor demonstrativo</span><strong id="pix-amount">R$ 0,00</strong>
+              </div>
+              <span class="pix-order-label" id="pix-order-label">Pedido de demonstração</span>
+              <label class="pix-copy-label" for="pix-copy-text">Código de demonstração (copia e cola)</label>
+              <textarea id="pix-copy-text" class="pix-copy-code" readonly spellcheck="false" rows="3" placeholder="Código ilustrativo"></textarea>
+              <button type="button" class="button button-outline full-width" id="pix-copy-button">📋 Copiar código de teste</button>
+              <div id="pix-message" class="pix-message" role="status" aria-live="polite">
+              </div>
+            </div>
+            <aside class="pix-instructions">
+              <img src="assets/doce-encanto-marca.svg" alt="" class="pix-mascot" /><span class="section-kicker">PASSO A PASSO</span>
+              <h2>
+                Como testar?
+              </h2>
+              <ol>
+                <li>
+                  Faça um pedido escolhendo <b>Pix</b> no checkout.
+                </li>
+                <li>
+                  Observe o QR Code e copie o código ilustrativo.
+                </li>
+                <li>
+                  Clique em <b>Simular pagamento aprovado</b> abaixo.
+                </li>
+                <li>
+                  Abra o painel administrativo e veja o status <b>Confirmado</b>.
+                </li>
+              </ol>
+              <p class="pix-warning">
+                ⚠️ <strong>Atenção:</strong> o QR Code não é Pix real, não contém chave Pix válida e não gera cobrança nem transferência. A aprovação acontece apenas pelo botão desta página.
+              </p>
+              <button type="button" class="button button-primary full-width" id="pix-confirm-button">✓ Simular pagamento aprovado</button>
+              <a class="pix-back" href="#acompanhar" data-nav="acompanhar">Acompanhar minha encomenda →</a>
+            </aside>
+          </div>
+        </div>
+      </section>
+      <section class="page" id="page-confirmacao" aria-label="Pedido confirmado">
+        <div class="container confirm-wrap">
+          <div class="confirm-card">
+            <div class="confirm-photo">
+              <img src="assets/cupcakes/morango.webp" alt="Cupcake real de morango com cobertura rosa" />
+            </div>
+            <div class="confirm-check">
+              <svg><use href="#i-check"/></svg>
+            </div>
+            <span class="section-kicker">QUE ALEGRIA!</span>
+            <h1>
+              Pedido <em>recebido!</em>
+            </h1>
+            <p>
+              O pedido foi registrado. Se o Pix demonstrativo foi aprovado, o administrador poderá iniciar a produção. Nenhuma cobrança real foi realizada.
+            </p>
+            <div class="confirm-number" id="confirmed-number">
+              Pedido #DE-0000
+            </div>
+            <div class="confirm-actions">
+              <a class="button button-primary" href="#acompanhar" data-nav="acompanhar">Acompanhar pedido <svg><use href="#i-arrow"/></svg></a><a class="button button-outline" href="#catalogo" data-nav="catalogo">Continuar explorando</a>
+            </div>
+            <small>Pagamento de demonstração não representa recebimento financeiro. Para cobranças reais, integre um provedor de pagamentos.</small>
+          </div>
+        </div>
+      </section>
+      <section class="page" id="page-acompanhar" aria-label="Acompanhar pedido">
+        <div class="page-heading">
+          <div class="container">
+            <span class="section-kicker">O CAMINHO DA FELICIDADE</span>
+            <h1>
+              Seu pedido, <em>passo a passo</em>
+            </h1>
+            <p>
+              Saiba em qual etapa seu doce se encontra.
+            </p>
+          </div>
+        </div>
+        <div class="container tracking-layout">
+          <div class="tracking-main">
+            <div class="tracking-top">
+              <div>
+                <span class="section-kicker">ACOMPANHAMENTO DO PEDIDO</span>
+                <h2 id="tracking-number">
+                  Ainda não há pedidos
+                </h2>
+              </div>
+              <span class="demo-label">Pagamento pendente</span>
+            </div>
+            <div id="tracking-body">
+            </div>
+          </div>
+          <aside class="tracking-side">
+            <div class="help-card">
+              <div class="help-card-icon">
+                💌
+              </div>
+              <h3>
+                Precisa de ajuda?
+              </h3>
+              <p>
+                Converse diretamente com a confeitaria pela área de mensagens de cada pedido.
+              </p>
+              <button class="button button-outline full-width" data-action="chat">Ver mensagens <svg><use href="#i-chat"/></svg></button>
+            </div>
+            <div class="help-card light">
+              <h3>
+                Uma observação importante ♡
+              </h3>
+              <p>
+                O rastreamento exibido aqui é ilustrativo. A localização real dependerá de uma integração com entregadores ou serviço de mapas.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+      <section class="page" id="page-conta" aria-label="Minha conta">
+        <div class="page-heading account-heading">
+          <div class="container">
+            <span class="section-kicker">UM CANTINHO SÓ SEU</span>
+            <h1>
+              Meu <em>cantinho doce</em>
+            </h1>
+            <p>
+              Escolha o perfil Cliente para comprar ou entre como Administrador para gerenciar a confeitaria.
+            </p>
+          </div>
+        </div>
+        <div class="container account-layout">
+          <div class="account-card account-profile">
+            <div class="account-avatar">
+              <img src="assets/doce-encanto-marca.svg" alt="" />
+            </div>
+            <h2 id="account-greeting">
+              Olá, visitante!
+            </h2>
+            <p id="account-description">
+              Cadastro e login conectados ao banco de dados.
+            </p>
+            <div id="account-demo-form">
+              <div class="account-tabs" role="tablist" aria-label="Acesso à conta">
+                <button class="is-active" type="button" data-account-tab="cadastro" role="tab" aria-selected="true">Criar conta</button><button type="button" data-account-tab="entrar" role="tab" aria-selected="false">Entrar</button>
+              </div>
+              <form id="account-preview-form" class="account-preview-form">
+                <label id="account-name-label" class="form-field">Seu nome<input id="account-name" type="text" autocomplete="off" minlength="2" required placeholder="Seu nome" /></label><label class="form-field">E-mail<input id="account-email" type="email" autocomplete="off" required placeholder="voce@exemplo.com" /></label><label class="form-field">Senha<input id="account-password" type="password" required minlength="10" maxlength="128" autocomplete="new-password" placeholder="10 caracteres ou mais" /></label><button type="submit" class="button button-primary full-width" id="account-submit">Criar minha conta</button>
+                <p id="account-auth-error" class="form-error" role="alert" hidden>
+                </p>
+              </form>
+              <p class="account-warning">
+                A senha é enviada somente à API local e armazenada como hash criptográfico. Não utilize senhas importantes em um ambiente acadêmico sem HTTPS.
+              </p>
+            </div>
+            <div id="account-demo-profile" hidden>
+              <span class="demo-label">Conta conectada</span>
+              <p id="account-simulated-email">
+              </p>
+              <a class="button button-primary" href="/admin.html" id="admin-profile-link" hidden>📊 Abrir painel administrativo</a><button type="button" class="button button-outline" id="account-signout">Sair da conta</button>
+            </div>
+          </div>
+          <div class="account-card account-orders">
+            <div class="section-heading compact">
+              <div>
+                <h2>
+                  Minhas encomendas
+                </h2>
+                <p>
+                  Histórico consultado no servidor, disponível somente para sua conta.
+                </p>
+              </div>
+            </div>
+            <div id="account-orders">
+            </div>
+            <div class="account-quicklinks">
+              <a href="#acompanhar">Acompanhar pedido →</a><a href="#catalogo">Escolher mais sabores →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="page" id="page-mensagens" aria-label="Mensagens com a confeitaria">
+        <div class="page-heading">
+          <div class="container">
+            <span class="section-kicker">ATENDIMENTO DOCE ENCANTO</span>
+            <h1>
+              Suas <em>mensagens</em>
+            </h1>
+            <p>
+              Escolha uma encomenda para conversar com a confeitaria.
+            </p>
+          </div>
+        </div>
+        <div class="container messages-layout">
+          <section class="chat-panel" id="chat-panel" aria-label="Chat sobre seus pedidos">
+            <header class="messages-header">
+              <img src="assets/doce-encanto-marca.svg" alt="" />
+              <div>
+                <strong>Confeitaria Doce Encanto</strong><small>Mensagens armazenadas com segurança no PostgreSQL</small>
+              </div>
+            </header>
+            <div class="chat-messages" id="chat-messages">
+              <div id="chat-order-notices" class="chat-order-notices" aria-live="polite">
+              </div>
+              <section class="conversation-block" id="customer-conversation-block" hidden>
+                <label for="chat-order-select">Selecione o pedido</label>
+                <select id="chat-order-select" aria-label="Pedido para conversar"></select>
+                <div id="chat-conversation" class="order-conversation" aria-live="polite">
+                </div>
+                <form id="chat-reply-form" class="chat-reply-form">
+                  <label for="chat-reply-text">Escrever mensagem</label>
+                  <textarea id="chat-reply-text" required minlength="2" maxlength="1000" rows="3" placeholder="Escreva sua mensagem para a confeitaria..."></textarea>
+                  <button type="submit">Enviar mensagem</button>
+                </form>
+              </section>
+            </div>
+          </section>
+          <aside class="messages-help-card">
+            <h2>
+              Atendimento por pedido
+            </h2>
+            <p>
+              Os avisos de atraso e troca de produtos aparecem nesta página. Você pode responder, e a administração verá sua mensagem no painel.
+            </p>
+            <p>
+              Este atendimento é assíncrono: a confeitaria precisa estar com o painel aberto para responder.
+            </p>
+            <a class="button button-outline" href="#acompanhar">Acompanhar pedido</a>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-about">
+          <a class="brand" href="#inicio" data-nav="inicio"><span class="brand-icon"><img src="assets/doce-encanto-marca.svg" alt="" /></span><span class="brand-text">doce<span>encanto</span><small>CONFEITARIA ARTESANAL</small></span></a>
+          <p>
+            Pequenos doces, grandes momentos. Feito com amor em cada detalhe.
+          </p>
+        </div>
+        <div>
+          <h3>
+            Explore
+          </h3>
+          <a href="#inicio" data-nav="inicio">Início</a><a href="#catalogo" data-nav="catalogo">Cardápio</a><a href="#monte" data-nav="monte">Monte seu cupcake</a>
+        </div>
+        <div>
+          <h3>
+            Sua encomenda
+          </h3>
+          <a href="#acompanhar" data-nav="acompanhar">Acompanhar pedido</a>
+          <a href="#mensagens" data-nav="mensagens">Mensagens</a><a href="#conta" data-nav="conta">Meu cantinho</a><button data-action="chat">Ajuda e suporte</button>
+        </div>
+        <div class="footer-news">
+          <h3>
+            Receba um docinho de alegria ♡
+          </h3>
+          <p>
+            Projeto acadêmico com API e banco PostgreSQL; Pix apenas simulado, sem cobrança real.
+          </p>
+          <span>🌷 Doce Encanto · projeto full-stack acadêmico</span>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="current-year"></span> Doce Encanto. Projeto acadêmico.</span><span>Feito com ♡ para encantar</span>
+      </div>
+      <p><a href="/avaliacao.html">Avaliar o projeto: pesquisa anônima para testes acadêmicos</a></p>
+    </footer>
+    <div class="overlay" id="drawer-overlay" hidden>
+    </div>
+    <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Meu carrinho" aria-hidden="true" tabindex="-1">
+      <div class="drawer-top">
+        <div>
+          <span class="section-kicker">SEUS DOCINHOS</span>
+          <h2>
+            Meu carrinho <span>♡</span>
+          </h2>
+        </div>
+        <button class="icon-button" data-action="close-cart" aria-label="Fechar carrinho"><svg><use href="#i-close"/></svg></button>
+      </div>
+      <div class="drawer-content" id="cart-items">
+      </div>
+      <div class="drawer-bottom">
+        <div class="cart-subtotal">
+          <span>Subtotal</span><strong id="cart-subtotal">R$ 0,00</strong>
+        </div>
+        <p>
+          Taxa de entrega calculada no checkout.
+        </p>
+        <button class="button button-primary full-width" id="go-checkout">Ir para o checkout <svg><use href="#i-arrow"/></svg></button><button class="continue-shopping" data-action="close-cart">Continuar escolhendo sabores</button>
+      </div>
+    </aside>
+    <div class="modal-overlay" id="product-modal-overlay" hidden>
+      <div class="product-modal" role="dialog" aria-modal="true" aria-label="Detalhes do cupcake">
+        <button class="modal-close icon-button" data-action="close-product" aria-label="Fechar detalhes"><svg><use href="#i-close"/></svg></button>
+        <div id="product-modal-body">
+        </div>
+      </div>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite">
+    </div>
+    <a class="chat-fab" id="chat-fab" href="#mensagens" aria-label="Abrir mensagens da confeitaria"><svg><use href="#i-chat"/></svg><span>Mensagens</span><b id="chat-notice-badge" class="chat-notice-badge" aria-label="Novos avisos" hidden>!</b></a>
+  </body>
+</html>

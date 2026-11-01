@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Avalie o Doce Encanto | Pesquisa acadêmica</title>
+    <link rel="icon" href="assets/doce-encanto-marca.svg" type="image/svg+xml">
+    <style>
+      :root {font-family: system-ui, sans-serif; color:#4b2636; background:#fff9fa;}
+      * {box-sizing:border-box} body {margin:0;line-height:1.55} header {background:#f9dce7; padding:24px 20px; text-align:center}
+      header img {width:54px; height:54px} main {max-width:780px;margin:25px auto;padding:0 18px 60px}
+      .card {background:#fff; border:1px solid #ebc6d4;border-radius:18px;padding:26px;box-shadow:0 8px 22px #4b263611}
+      h1 {margin:6px 0 0; font-size:2rem} h2 {font-size:1.25rem; margin-top:0} a {color:#872d55}
+      fieldset {border:1px solid #eed5df; border-radius:12px; margin:18px 0; padding:15px}
+      legend {font-weight:700; padding:0 5px} label {display:block; margin:12px 0 4px;font-weight:600}
+      textarea,select {width:100%;border:1px solid #c69baa;border-radius:9px; padding:10px; font:inherit; background:white}
+      textarea {min-height:85px} input[type=radio] {margin-right:7px}
+      .radio-row {display:flex; flex-wrap:wrap; gap:12px 18px}
+      .radio-row label {font-weight:400; margin:0}
+      .note {background:#fff1f5;border-left:4px solid #c35c87; padding:13px 15px; border-radius:5px}
+      button {background:#982c60;color:#fff;font-weight:700;padding:13px 22px;border:none;border-radius:9px;cursor:pointer;font:inherit}
+      button:disabled {opacity:.65;cursor:wait} #message {font-weight:700; padding:15px; border-radius:8px}
+      @media(max-width:600px){.card{padding:17px}.radio-row{flex-direction:column;gap:9px}}
+    </style>
+    <script defer src="avaliacao.js"></script>
+  </head>
+  <body>
+    <header><img src="assets/doce-encanto-marca.svg" alt="Marca Doce Encanto"><h1>Avalie o Doce Encanto</h1><p>Pesquisa voluntária para melhorar um projeto acadêmico</p></header>
+    <main>
+      <p><a href="/">Voltar à loja</a></p>
+      <div class="card">
+        <h2>Queremos conhecer sua experiência</h2>
+        <p>Teste o site com informações fictícias. A simulação de Pix não movimenta dinheiro. Não informe senha, e-mail, endereço ou dados pessoais nas respostas.</p>
+        <p class="note">Respostas anônimas. Você pode não participar. A pesquisa usa somente suas notas e comentários para o relatório de usabilidade.</p>
+        <form id="feedback-form">
+          <label for="perfil">Qual área você testou?</label>
+          <select id="perfil" required><option value="">Selecione</option><option value="CLIENTE">Cliente</option><option value="ADMIN">Administrador</option><option value="AMBOS">As duas</option></select>
+          <label for="dispositivo">Em qual dispositivo?</label>
+          <select id="dispositivo" required><option value="">Selecione</option><option value="CELULAR">Celular</option><option value="COMPUTADOR">Computador</option><option value="TABLET">Tablet</option></select>
+          <fieldset><legend>Facilidade para navegar (1 = difícil, 5 = fácil)</legend><div class="radio-row" id="nota-navegacao"></div></fieldset>
+          <fieldset><legend>Aparência e organização (1 = ruim, 5 = ótima)</legend><div class="radio-row" id="nota-visual"></div></fieldset>
+          <fieldset><legend>Facilidade para completar a tarefa (1 = difícil, 5 = fácil)</legend><div class="radio-row" id="nota-facilidade"></div></fieldset>
+          <fieldset><legend>Conseguiu completar a tarefa que tentou?</legend><div class="radio-row"><label><input type="radio" name="concluiu" value="sim" required>Sim</label><label><input type="radio" name="concluiu" value="nao">Não</label></div></fieldset>
+          <label for="positivo">O que você mais gostou? *</label><textarea id="positivo" maxlength="700" minlength="4" required></textarea>
+          <label for="dificuldade">O que foi difícil ou confuso?</label><textarea id="dificuldade" maxlength="700"></textarea>
+          <label for="sugestao">O que melhoraria?</label><textarea id="sugestao" maxlength="700"></textarea>
+          <label><input type="checkbox" id="concordo" required> Concordo em enviar esta avaliação anônima para fins acadêmicos.</label>
+          <p id="message" role="status" aria-live="polite" hidden></p>
+          <button id="enviar" type="submit">Enviar avaliação</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
