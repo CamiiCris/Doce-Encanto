@@ -18,6 +18,7 @@ const { seed } = require('./seed');
         await pool.query(fs.readFileSync(path.join(__dirname, '../sql/005_conversas.sql'), 'utf8'));
         await pool.query(fs.readFileSync(path.join(__dirname, '../sql/006_entrega_cliente.sql'), 'utf8'));
         await pool.query(fs.readFileSync(path.join(__dirname, '../sql/007_avaliacao.sql'), 'utf8'));
+        await pool.query(fs.readFileSync(path.join(__dirname, '../sql/008_teste_solucao.sql'), 'utf8'));
         await seed(pool);
         console.log('Banco atualizado: entrega confirmada pelo cliente e avaliações de usabilidade. Dados preservados.');
     }

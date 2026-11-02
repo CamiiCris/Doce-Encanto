@@ -25,3 +25,23 @@ test('avaliação limita texto e exige tarefa preenchida', () => {
     assert.throws(() => validateFeedback({ ...valid(), sugestao: 'a'.repeat(701) }), /700/);
     assert.throws(() => validateFeedback({ ...valid(), concluiuTarefa: null }), /tarefa/);
 });
+
+test('formulário acadêmico guarda nome, data e funcionalidade não testada', () => {
+    const data = validateFeedback({
+        ...valid(), nomeColega: 'Pessoa Exemplo', dataTeste: '2026-10-25',
+        dificuldade: 'Nenhuma falha', sugestao: 'Nenhuma correção', naoTestado: 'Área administrativa'
+    });
+    assert.equal(data.nomeColega, 'Pessoa Exemplo');
+    assert.equal(data.dataTeste, '2026-10-25');
+    assert.equal(data.naoTestado, 'Área administrativa');
+});
+test('formulário acadêmico exige identificação e respostas', () => {
+    const candidate = {
+        ...valid(), nomeColega: 'Pessoa Exemplo', dataTeste: '2026-10-25',
+        dificuldade: 'Nenhuma falha', sugestao: 'Nenhuma correção', naoTestado: 'Área administrativa'
+    };
+    assert.throws(() => validateFeedback({ ...candidate, nomeColega: '' }), /nome/);
+    assert.throws(() => validateFeedback({ ...candidate, dataTeste: 'not-a-date' }), /data/);
+    assert.throws(() => validateFeedback({ ...candidate, naoTestado: '' }), /não testadas/);
+    assert.throws(() => validateFeedback({ ...candidate, sugestao: '' }), /corrigido/);
+});

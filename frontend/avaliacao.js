@@ -1,5 +1,12 @@
 'use strict';
+
 const feedbackForm = document.getElementById('feedback-form');
+const today = new Date();
+const localDate = [today.getFullYear(), String(today.getMonth() + 1).padStart(2, '0'), String(today.getDate()).padStart(2, '0')].join('-');
+const dateField = document.getElementById('data-teste');
+dateField.value = localDate;
+dateField.max = localDate;
+
 for (const name of ['navegacao', 'visual', 'facilidade']) {
     const container = document.getElementById(`nota-${name}`);
     for (let grade = 1; grade <= 5; grade += 1) {
@@ -13,42 +20,50 @@ for (const name of ['navegacao', 'visual', 'facilidade']) {
         container.append(label);
     }
 }
-feedbackForm.addEventListener('submit', async (event) => {
+
+feedbackForm.addEventListener('submit', async event => {
     event.preventDefault();
     const button = document.getElementById('enviar');
     const message = document.getElementById('message');
     const chosen = name => feedbackForm.querySelector(`input[name="${name}"]:checked`)?.value;
     const payload = {
+        nomeColega: document.getElementById('nome-colega').value.trim(),
+        dataTeste: dateField.value,
         perfilTestado: document.getElementById('perfil').value,
         dispositivo: document.getElementById('dispositivo').value,
         notaNavegacao: Number(chosen('navegacao')),
         notaVisual: Number(chosen('visual')),
         notaFacilidade: Number(chosen('facilidade')),
         concluiuTarefa: chosen('concluiu') === 'sim',
-        pontoPositivo: document.getElementById('positivo').value,
-        dificuldade: document.getElementById('dificuldade').value,
-        sugestao: document.getElementById('sugestao').value
+        pontoPositivo: document.getElementById('positivo').value.trim(),
+        dificuldade: document.getElementById('dificuldade').value.trim(),
+        sugestao: document.getElementById('sugestao').value.trim(),
+        naoTestado: document.getElementById('nao-testado').value.trim()
     };
+    message.hidden = true;
     button.disabled = true;
+    button.textContent = 'Enviando...';
     try {
         const response = await fetch('/api/avaliacoes', {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
             body: JSON.stringify(payload)
         });
         const result = await response.json();
-        if (!response.ok)
-            throw new Error(result.erro || 'Não foi possível registrar.');
-        message.textContent = result.mensagem;
+        if (!response.ok) throw new Error(result.erro || 'Não foi possível registrar o teste.');
+        message.textContent = result.mensagem || 'Resultado do teste registrado com sucesso.';
+        message.dataset.type = 'success';
         message.hidden = false;
-        message.style.backgroundColor = '#e6f7eb';
         feedbackForm.reset();
-    }
-    catch (error) {
-        message.textContent = error.message;
+        dateField.value = localDate;
+        message.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (error) {
+        message.textContent = error.message || 'Falha ao enviar a avaliação.';
+        message.dataset.type = 'error';
         message.hidden = false;
-        message.style.backgroundColor = '#fff0f0';
-    }
-    finally {
+    } finally {
         button.disabled = false;
+        button.textContent = 'Enviar resultado do teste';
     }
 });

@@ -1,54 +1,115 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Avalie o Doce Encanto | Pesquisa acadêmica</title>
-    <link rel="icon" href="assets/doce-encanto-marca.svg" type="image/svg+xml">
-    <style>
-      :root {font-family: system-ui, sans-serif; color:#4b2636; background:#fff9fa;}
-      * {box-sizing:border-box} body {margin:0;line-height:1.55} header {background:#f9dce7; padding:24px 20px; text-align:center}
-      header img {width:54px; height:54px} main {max-width:780px;margin:25px auto;padding:0 18px 60px}
-      .card {background:#fff; border:1px solid #ebc6d4;border-radius:18px;padding:26px;box-shadow:0 8px 22px #4b263611}
-      h1 {margin:6px 0 0; font-size:2rem} h2 {font-size:1.25rem; margin-top:0} a {color:#872d55}
-      fieldset {border:1px solid #eed5df; border-radius:12px; margin:18px 0; padding:15px}
-      legend {font-weight:700; padding:0 5px} label {display:block; margin:12px 0 4px;font-weight:600}
-      textarea,select {width:100%;border:1px solid #c69baa;border-radius:9px; padding:10px; font:inherit; background:white}
-      textarea {min-height:85px} input[type=radio] {margin-right:7px}
-      .radio-row {display:flex; flex-wrap:wrap; gap:12px 18px}
-      .radio-row label {font-weight:400; margin:0}
-      .note {background:#fff1f5;border-left:4px solid #c35c87; padding:13px 15px; border-radius:5px}
-      button {background:#982c60;color:#fff;font-weight:700;padding:13px 22px;border:none;border-radius:9px;cursor:pointer;font:inherit}
-      button:disabled {opacity:.65;cursor:wait} #message {font-weight:700; padding:15px; border-radius:8px}
-      @media(max-width:600px){.card{padding:17px}.radio-row{flex-direction:column;gap:9px}}
-    </style>
-    <script defer src="avaliacao.js"></script>
-  </head>
-  <body>
-    <header><img src="assets/doce-encanto-marca.svg" alt="Marca Doce Encanto"><h1>Avalie o Doce Encanto</h1><p>Pesquisa voluntária para melhorar um projeto acadêmico</p></header>
-    <main>
-      <p><a href="/">Voltar à loja</a></p>
-      <div class="card">
-        <h2>Queremos conhecer sua experiência</h2>
-        <p>Teste o site com informações fictícias. A simulação de Pix não movimenta dinheiro. Não informe senha, e-mail, endereço ou dados pessoais nas respostas.</p>
-        <p class="note">Respostas anônimas. Você pode não participar. A pesquisa usa somente suas notas e comentários para o relatório de usabilidade.</p>
-        <form id="feedback-form">
-          <label for="perfil">Qual área você testou?</label>
-          <select id="perfil" required><option value="">Selecione</option><option value="CLIENTE">Cliente</option><option value="ADMIN">Administrador</option><option value="AMBOS">As duas</option></select>
-          <label for="dispositivo">Em qual dispositivo?</label>
-          <select id="dispositivo" required><option value="">Selecione</option><option value="CELULAR">Celular</option><option value="COMPUTADOR">Computador</option><option value="TABLET">Tablet</option></select>
-          <fieldset><legend>Facilidade para navegar (1 = difícil, 5 = fácil)</legend><div class="radio-row" id="nota-navegacao"></div></fieldset>
-          <fieldset><legend>Aparência e organização (1 = ruim, 5 = ótima)</legend><div class="radio-row" id="nota-visual"></div></fieldset>
-          <fieldset><legend>Facilidade para completar a tarefa (1 = difícil, 5 = fácil)</legend><div class="radio-row" id="nota-facilidade"></div></fieldset>
-          <fieldset><legend>Conseguiu completar a tarefa que tentou?</legend><div class="radio-row"><label><input type="radio" name="concluiu" value="sim" required>Sim</label><label><input type="radio" name="concluiu" value="nao">Não</label></div></fieldset>
-          <label for="positivo">O que você mais gostou? *</label><textarea id="positivo" maxlength="700" minlength="4" required></textarea>
-          <label for="dificuldade">O que foi difícil ou confuso?</label><textarea id="dificuldade" maxlength="700"></textarea>
-          <label for="sugestao">O que melhoraria?</label><textarea id="sugestao" maxlength="700"></textarea>
-          <label><input type="checkbox" id="concordo" required> Concordo em enviar esta avaliação anônima para fins acadêmicos.</label>
-          <p id="message" role="status" aria-live="polite" hidden></p>
-          <button id="enviar" type="submit">Enviar avaliação</button>
-        </form>
-      </div>
-    </main>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8fa">
+  <meta name="description" content="Formulário de testes da solução Doce Encanto para avaliação acadêmica.">
+  <title>Testes da solução | Doce Encanto</title>
+  <link rel="icon" href="assets/doce-encanto-marca.svg" type="image/svg+xml">
+  <style>
+    :root { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; color: #563043; background: #fff9fa; }
+    * {box-sizing:border-box}
+    body {margin:0; line-height:1.6}
+    a {color:#922f59; font-weight:600}
+    .top {background:linear-gradient(125deg,#fce5ed,#fff7f7); border-bottom:1px solid #f3d6df; padding:40px 20px 48px; text-align:center}
+    .top img {width:62px; height:62px; object-fit:contain}
+    .eyebrow {display:block; color:#a24466; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:2px; margin-top:10px}
+    h1 {font-family:Georgia,serif; font-weight:500; font-size:clamp(2.1rem,5vw,3.1rem); margin:4px 0 8px}
+    .top p {margin:auto; max-width:620px; color:#7e5667}
+    main {max-width:900px; margin:26px auto 70px; padding:0 18px}
+    .back {display:inline-block; margin-bottom:20px; text-decoration:none}
+    .intro {background:#fff; border:1px solid #f0d9e2; border-radius:20px; padding:22px 26px; margin-bottom:22px}
+    .intro p {margin:8px 0 0}
+    .small-note {color:#7b5867; font-size:.92rem}
+    .badge {display:inline-block; padding:5px 12px; background:#f9e4ec; color:#822a50; border-radius:40px; font-size:.78rem; font-weight:800; letter-spacing:.4px}
+    .section {background:#fff; border:1px solid #f0d9e2; border-radius:20px; margin:18px 0; padding:24px 26px; box-shadow:0 8px 24px rgba(87,42,61,.04)}
+    .section-title {display:flex; gap:13px; align-items:flex-start; margin-bottom:17px}
+    .number {flex:0 0 34px; height:34px; border-radius:50%; background:#f6dce6; color:#8e3558; display:grid; place-items:center; font-weight:800}
+    .section-title h2 {font-size:1.15rem; margin:0}
+    .section-title p {margin:3px 0 0; color:#846475; font-size:.88rem}
+    .grid {display:grid; grid-template-columns:1fr 1fr; gap:14px 18px}
+    .field {display:block; margin-bottom:16px}
+    .field:last-child {margin-bottom:0}
+    label.field > span:first-child, .field-title {display:block; font-weight:700; margin-bottom:7px}
+    input[type=text], input[type=date], select, textarea {width:100%; padding:12px 14px; color:#563043; background:#fffdfd; border:1px solid #d9b5c3; border-radius:11px; font:inherit; transition:border-color .15s,box-shadow .15s}
+    input:focus,select:focus,textarea:focus {outline:2px solid #d982a1; outline-offset:1px; border-color:#d982a1}
+    textarea {min-height:116px; resize:vertical}
+    input::placeholder,textarea::placeholder {color:#9d828e}
+    .help {display:block; margin-top:6px; color:#886a78; font-size:.83rem; font-weight:400}
+    .required {color:#b33c65}
+    fieldset {margin:0; padding:14px 16px; border:1px solid #eed8e0; border-radius:12px}
+    legend {padding:0 5px; font-weight:700}
+    .radio-row {display:flex; flex-wrap:wrap; gap:10px 16px}
+    .radio-row label {cursor:pointer; display:inline-flex; gap:6px; align-items:center}
+    input[type=radio],input[type=checkbox] {accent-color:#a93f6c}
+    .ratings {display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:16px 0}
+    .rating legend {font-size:.92rem}
+    .consent {display:flex; align-items:flex-start; gap:10px; background:#fff1f5; padding:14px 15px; border-radius:12px; border:1px solid #f0d4dd}
+    .consent label {font-size:.89rem; cursor:pointer}
+    .consent input {margin-top:5px}
+    .actions {display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-top:20px}
+    button {padding:14px 26px; border:0; border-radius:12px; background:#9a345e; color:#fff; font:inherit; font-weight:700; cursor:pointer}
+    button:hover {background:#7d284b}
+    button:disabled {opacity:.65; cursor:wait}
+    #message {border-radius:12px; padding:14px; margin-top:16px; font-weight:600}
+    #message[data-type=success] {background:#eaf7eb; color:#206734}
+    #message[data-type=error] {background:#fff0f0; color:#9d2e38}
+    @media(max-width:750px) {.ratings {grid-template-columns:1fr}}
+    @media(max-width:580px) {.section,.intro{padding:20px 16px}.grid{grid-template-columns:1fr}.radio-row{gap:9px}}
+  </style>
+  <script defer src="avaliacao.js"></script>
+</head>
+<body>
+  <header class="top">
+    <img src="assets/doce-encanto-marca.svg" alt="Marca do Doce Encanto">
+    <span class="eyebrow">Pesquisa acadêmica</span>
+    <h1>Testes da solução</h1>
+    <p>Ajude a avaliar o funcionamento do Doce Encanto. Os resultados serão utilizados no relatório de testes da aplicação.</p>
+  </header>
+  <main>
+    <a class="back" href="/">← Voltar à loja</a>
+    <div class="intro">
+      <span class="badge">1 resposta por colega · Meta: 5 participantes</span>
+      <p>Antes de responder, utilize algumas funcionalidades do aplicativo. Conte o que funcionou, o que precisa de correção e o que não foi testado.</p>
+      <p class="small-note">Use dados fictícios nos pedidos. O Pix é uma simulação e não movimenta dinheiro. O nome informado será utilizado para identificar a participação no relatório e ficará visível somente à administração. Não informe senhas, endereço, telefone ou e-mail nas respostas.</p>
+    </div>
+    <form id="feedback-form">
+      <section class="section" aria-labelledby="dados-title">
+        <div class="section-title"><span class="number">01</span><div><h2 id="dados-title">Identificação do teste</h2><p>Informações necessárias para preencher a tabela da atividade.</p></div></div>
+        <div class="grid">
+          <label class="field" for="nome-colega"><span>Nome do participante <span class="required">*</span></span><input id="nome-colega" name="nomeColega" type="text" minlength="2" maxlength="100" autocomplete="name" placeholder="Nome do colega" required></label>
+          <label class="field" for="data-teste"><span>Data do teste <span class="required">*</span></span><input id="data-teste" name="dataTeste" type="date" required></label>
+          <label class="field" for="perfil"><span>Área testada <span class="required">*</span></span><select id="perfil" required><option value="">Selecione</option><option value="CLIENTE">Loja / Cliente</option><option value="ADMIN">Gestão / Administrador</option><option value="AMBOS">As duas áreas</option></select></label>
+          <label class="field" for="dispositivo"><span>Dispositivo utilizado <span class="required">*</span></span><select id="dispositivo" required><option value="">Selecione</option><option value="CELULAR">Celular</option><option value="COMPUTADOR">Computador</option><option value="TABLET">Tablet</option></select></label>
+        </div>
+      </section>
+      <section class="section" aria-labelledby="resultado-title">
+        <div class="section-title"><span class="number">02</span><div><h2 id="resultado-title">O que foi testado?</h2><p>Responda às questões solicitadas na atividade.</p></div></div>
+        <label class="field" for="positivo"><span>O que testou e funcionou? <span class="required">*</span></span>
+          <textarea id="positivo" minlength="4" maxlength="700" required placeholder="Ex.: Consultei o catálogo, montei um cupcake, adicionei ao carrinho e consegui finalizar o pedido."></textarea><small class="help">Descreva as funcionalidades que conseguiu usar normalmente.</small></label>
+        <label class="field" for="dificuldade"><span>O que testou e não funcionou? <span class="required">*</span></span>
+          <textarea id="dificuldade" minlength="3" maxlength="700" required placeholder="Ex.: Ao abrir o carrinho no celular, o botão ficou difícil de acessar. Se tudo funcionou, escreva 'Nenhuma falha encontrada'."></textarea><small class="help">Se não encontrou problemas, informe isso.</small></label>
+        <label class="field" for="sugestao"><span>O que deve ser corrigido? <span class="required">*</span></span>
+          <textarea id="sugestao" minlength="3" maxlength="700" required placeholder="Ex.: Ajustar o botão do carrinho para telas pequenas. Se não há correções, escreva 'Nenhuma correção necessária'."></textarea></label>
+        <label class="field" for="nao-testado"><span>Funcionalidade não testada (faltou ou não foi implementada) <span class="required">*</span></span>
+          <textarea id="nao-testado" minlength="3" maxlength="700" required placeholder="Ex.: Não consegui testar a área de administração, pois não tinha acesso. Ou: Não encontrei rastreamento por mapa."></textarea><small class="help">Inclua o que não conseguiu testar, não encontrou ou ainda não está implementado. Se não houver, escreva 'Nenhuma'.</small></label>
+      </section>
+      <section class="section" aria-labelledby="avaliacao-title">
+        <div class="section-title"><span class="number">03</span><div><h2 id="avaliacao-title">Avaliação geral</h2><p>Notas rápidas que ajudam a resumir os cinco testes.</p></div></div>
+        <div class="ratings">
+          <fieldset class="rating"><legend>Navegação (1 difícil – 5 fácil)</legend><div class="radio-row" id="nota-navegacao"></div></fieldset>
+          <fieldset class="rating"><legend>Aparência (1 ruim – 5 ótima)</legend><div class="radio-row" id="nota-visual"></div></fieldset>
+          <fieldset class="rating"><legend>Facilidade (1 difícil – 5 fácil)</legend><div class="radio-row" id="nota-facilidade"></div></fieldset>
+        </div>
+        <fieldset><legend>Conseguiu concluir a tarefa principal?</legend><div class="radio-row"><label><input type="radio" name="concluiu" value="sim" required> Sim</label><label><input type="radio" name="concluiu" value="nao"> Não</label></div></fieldset>
+      </section>
+      <section class="section">
+        <div class="consent"><input type="checkbox" id="concordo" required><label for="concordo">Concordo com o registro do meu nome, da data e das respostas para fins de avaliação acadêmica. Essas informações ficarão disponíveis à administração do projeto e poderão constar na tabela do relatório.</label></div>
+        <p id="message" role="status" aria-live="polite" hidden></p>
+        <div class="actions"><button type="submit" id="enviar">Enviar resultado do teste</button><span class="small-note">Preencha apenas uma avaliação por participante.</span></div>
+      </section>
+    </form>
+  </main>
+</body>
 </html>

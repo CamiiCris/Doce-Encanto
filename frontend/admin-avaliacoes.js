@@ -25,11 +25,13 @@
                 const entry = document.createElement('article');
                 entry.className = 'admin-feedback-entry';
                 const title = document.createElement('h3');
-                title.textContent = `#${review.id_avaliacao} - ${review.perfil_testado} - ${review.dispositivo}`;
+                const nome = review.nome_colega || 'Avaliação anterior (sem nome)';
+                const dataTeste = review.data_teste ? String(review.data_teste).slice(0, 10).split('-').reverse().join('/') : 'Não informada';
+                title.textContent = `#${review.id_avaliacao} - ${nome} - ${dataTeste} - ${review.perfil_testado} - ${review.dispositivo}`;
                 const rating = document.createElement('p');
                 rating.textContent = `Notas: navegação ${review.nota_navegacao}, visual ${review.nota_visual}, facilidade ${review.nota_facilidade}. Tarefa concluída: ${review.concluiu_tarefa ? 'sim' : 'não'}.`;
                 entry.append(title, rating);
-                for (const [label, value] of [['Ponto positivo', review.ponto_positivo], ['Dificuldade', review.dificuldade], ['Sugestão', review.sugestao]]) {
+                for (const [label, value] of [['O que testou e funcionou', review.ponto_positivo], ['O que testou e não funcionou', review.dificuldade], ['O que deve ser corrigido', review.sugestao], ['Funcionalidade não testada', review.nao_testado]]) {
                     if (!value)
                         continue;
                     const para = document.createElement('p');

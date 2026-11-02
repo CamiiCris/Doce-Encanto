@@ -84,7 +84,7 @@ function createAdminRouter({ query, transaction, requireAuth }) {
     router.get('/avaliacoes', asyncRoute(async (_req, res) => {
         const { rows } = await query(`SELECT id_avaliacao, perfil_testado, dispositivo, nota_navegacao,
             nota_visual, nota_facilidade, concluiu_tarefa, ponto_positivo, dificuldade,
-            sugestao, criado_em FROM doce_encanto.avaliacao_usabilidade
+            sugestao, criado_em, nome_colega, data_teste, nao_testado FROM doce_encanto.avaliacao_usabilidade
             ORDER BY criado_em DESC LIMIT 100`);
         res.json({ avaliacoes: rows });
     }));
