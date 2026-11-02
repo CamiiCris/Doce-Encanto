@@ -267,89 +267,15 @@ Doce_Encanto/
 └── README.md
 ```
 
-A pasta `frontend` contém as interfaces e os recursos visuais.
-
-A pasta `backend` reúne a API, as regras de negócio e a conexão com o banco de dados.
-
-A pasta `sql` contém os scripts utilizados na criação e atualização das tabelas.
-
-A pasta `tests` contém os testes automatizados do sistema.
-
 ---
-
-## Como Executar
-
-### Pré-requisitos
-
-Para executar o projeto localmente, são necessários:
-
-- Node.js.
-- PostgreSQL.
-- Git.
-
-O pgAdmin 4 pode ser utilizado para administrar e consultar o banco de dados.
-
-### 1. Clonar o repositório
-
-```bash
-git clone https://github.com/SEU_USUARIO/Doce-Encanto.git
-```
-
-### 2. Acessar o back-end
-
-```bash
-cd Doce-Encanto/backend
-```
-
-### 3. Instalar as dependências
-
-```bash
-npm install
-```
-
-### 4. Configurar o banco de dados
-
-Crie um banco PostgreSQL chamado:
-
-```text
-doce_encanto
-```
-
-Crie o arquivo `.env` a partir do `.env.example` e configure as variáveis:
-
-```env
-PGHOST=localhost
-PGPORT=5432
-PGUSER=postgres
-PGPASSWORD=SUA_SENHA
-PGDATABASE=doce_encanto
-
-PORT=3000
-NODE_ENV=development
-DEMO_MODE=true
-```
-
-A senha deve corresponder à configuração local do PostgreSQL.
-
-### 5. Preparar as tabelas
-
-```bash
-npm run db:setup
-```
-
-### 6. Iniciar o servidor
-
-```bash
-npm run dev
-```
 
 A aplicação estará disponível nos seguintes endereços:
 
 | Página | Endereço |
 |---|---|
-| Loja | http://localhost:3000 |
-| Administração | http://localhost:3000/admin.html |
-| Avaliação | http://localhost:3000/avaliacao.html |
+| Loja | https://doce-encanto-wqum.onrender.com/ |
+| Administração | https://doce-encanto-wqum.onrender.com/admin.html#inicio |
+| Avaliação | https://doce-encanto-wqum.onrender.com/avaliacao.html |
 
 ---
 
@@ -368,12 +294,6 @@ Entre os recursos testados estão:
 - Confirmação de recebimento.
 - Comunicação entre os perfis.
 - Regras do pagamento demonstrativo.
-
-Para executar os testes:
-
-```bash
-npm test
-```
 
 A versão organizada do projeto possui **33 testes automatizados aprovados** na última execução registrada.
 
