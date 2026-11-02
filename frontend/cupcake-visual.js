@@ -1,7 +1,4 @@
-/* Doce Encanto — ilustração SVG em camadas, gerada localmente no navegador.
- * Cada combinação de massa, recheio e cobertura produz sua própria imagem.
- * É uma representação ilustrada da receita; não é foto de produto pronto.
- */
+
 (() => {
     'use strict';
     const tint = {

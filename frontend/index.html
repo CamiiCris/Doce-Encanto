@@ -309,7 +309,7 @@
                 “Os cupcakes são lindos e deliciosos! Dá para sentir o carinho em cada detalhe.”
               </p>
               <div class="review-person">
-                🌸 <span><strong>Mariana S.</strong><small>Cliente encantada</small></span>
+                 <span><strong>Mariana S.</strong><small>Cliente encantada</small></span>
               </div>
             </article>
             <article class="review-card">
@@ -318,7 +318,7 @@
                 “Montei meu próprio cupcake e amei o resultado. Já quero experimentar todos os sabores!”
               </p>
               <div class="review-person">
-                💗 <span><strong>Ana L.</strong><small>Cliente encantada</small></span>
+                 <span><strong>Ana L.</strong><small>Cliente encantada</small></span>
               </div>
             </article>
             <article class="review-card">
@@ -327,7 +327,7 @@
                 “Um presente super especial. A apresentação é delicada e o sabor maravilhoso.”
               </p>
               <div class="review-person">
-                🌷 <span><strong>Juliana R.</strong><small>Cliente encantada</small></span>
+                 <span><strong>Juliana R.</strong><small>Cliente encantada</small></span>
               </div>
             </article>
           </div>
@@ -405,7 +405,6 @@
           <div class="builder-form">
             <div class="builder-intro">
               <div class="builder-intro-icon">
-                ✨
               </div>
               <div>
                 <h2>
@@ -523,7 +522,7 @@
                 </h2>
               </div>
               <div class="form-grid">
-                <label class="form-field form-wide">Rua / avenida <input name="rua" type="text" required autocomplete="address-line1" placeholder="Nome da rua" /></label><label class="form-field">Número <input name="numero" type="text" required placeholder="Nº" /></label><label class="form-field">Complemento <input name="complemento" type="text" placeholder="Apto, bloco (opcional)" /></label><label class="form-field">Bairro <input name="bairro" type="text" required placeholder="Seu bairro" /></label><label class="form-field">Cidade <input name="cidade" type="text" required autocomplete="address-level2" placeholder="Sua cidade" /></label><label class="form-field">UF <input name="uf" type="text" required minlength="2" maxlength="2" autocomplete="address-level1" placeholder="PR" /></label>
+                <label class="form-field form-wide">Rua / avenida <input name="rua" type="text" required autocomplete="address-line1" placeholder="Nome da rua" /></label><label class="form-field">Número <input name="numero" type="text" required placeholder="Nº" /></label><label class="form-field">Complemento <input name="complemento" type="text" placeholder="Apto, bloco (opcional)" /></label><label class="form-field">Bairro <input name="bairro" type="text" required placeholder="Seu bairro" />
               </div>
             </div>
             <div class="checkout-box">
@@ -537,7 +536,7 @@
                 <label><input type="radio" name="pagamento" value="PIX" checked /><span class="radio-card"><strong>◆ PIX</strong><small>QR Code e copia e cola de teste</small></span></label><label><input type="radio" name="pagamento" value="CARTAO" /><span class="radio-card"><strong>▭ Cartão</strong><small>Sem dados reais do cartão</small></span></label>
               </div>
               <p class="payment-disclaimer">
-                Pix demonstrativo disponível com DEMO_MODE=true. O QR Code não é bancário e nenhuma transferência será realizada. Cartão continua somente como intenção de pagamento.
+                Pix demonstrativo disponível. O QR Code não é bancário e nenhuma transferência será realizada. Cartão continua somente como intenção de pagamento.
               </p>
             </div>
             <button class="button button-primary full-width checkout-submit" type="submit">Registrar meu pedido <svg><use href="#i-arrow"/></svg></button>
@@ -562,7 +561,7 @@
             <div id="checkout-totals">
             </div>
             <p class="secure-note">
-              <svg><use href="#i-shield"/></svg> Seus dados são enviados à API local. A simulação não movimenta dinheiro.
+              <svg><use href="#i-shield"/></svg> A simulação não movimenta dinheiro.
             </p>
           </aside>
         </div>
@@ -570,13 +569,10 @@
       <section class="page" id="page-pix" aria-label="Pix de demonstração">
         <div class="container pix-demo-wrap">
           <div class="pix-head">
-            <span class="section-kicker">💗 DOCE ENCANTO · PAGAMENTO DIDÁTICO</span>
+            <span class="section-kicker">💗 DOCE ENCANTO · PAGAMENTO </span>
             <h1>
               Seu docinho está <em>quase pronto!</em>
             </h1>
-            <p>
-              Veja como seria uma tela de pagamento Pix — sem cobrança de verdade.
-            </p>
           </div>
           <div class="pix-grid">
             <div class="pix-demo-card">
@@ -606,23 +602,6 @@
             </div>
             <aside class="pix-instructions">
               <img src="assets/doce-encanto-marca.svg" alt="" class="pix-mascot" /><span class="section-kicker">PASSO A PASSO</span>
-              <h2>
-                Como testar?
-              </h2>
-              <ol>
-                <li>
-                  Faça um pedido escolhendo <b>Pix</b> no checkout.
-                </li>
-                <li>
-                  Observe o QR Code e copie o código ilustrativo.
-                </li>
-                <li>
-                  Clique em <b>Simular pagamento aprovado</b> abaixo.
-                </li>
-                <li>
-                  Abra o painel administrativo e veja o status <b>Confirmado</b>.
-                </li>
-              </ol>
               <p class="pix-warning">
                 ⚠️ <strong>Atenção:</strong> o QR Code não é Pix real, não contém chave Pix válida e não gera cobrança nem transferência. A aprovação acontece apenas pelo botão desta página.
               </p>
@@ -646,7 +625,7 @@
               Pedido <em>recebido!</em>
             </h1>
             <p>
-              O pedido foi registrado. Se o Pix demonstrativo foi aprovado, o administrador poderá iniciar a produção. Nenhuma cobrança real foi realizada.
+              O pedido foi registrado.
             </p>
             <div class="confirm-number" id="confirmed-number">
               Pedido #DE-0000
@@ -740,9 +719,6 @@
                 <p id="account-auth-error" class="form-error" role="alert" hidden>
                 </p>
               </form>
-              <p class="account-warning">
-                A senha é enviada somente à API local e armazenada como hash criptográfico. Não utilize senhas importantes em um ambiente acadêmico sem HTTPS.
-              </p>
             </div>
             <div id="account-demo-profile" hidden>
               <span class="demo-label">Conta conectada</span>
@@ -757,9 +733,6 @@
                 <h2>
                   Minhas encomendas
                 </h2>
-                <p>
-                  Histórico consultado no servidor, disponível somente para sua conta.
-                </p>
               </div>
             </div>
             <div id="account-orders">
@@ -787,7 +760,7 @@
             <header class="messages-header">
               <img src="assets/doce-encanto-marca.svg" alt="" />
               <div>
-                <strong>Confeitaria Doce Encanto</strong><small>Mensagens armazenadas com segurança no PostgreSQL</small>
+                <strong>Confeitaria Doce Encanto</strong>
               </div>
             </header>
             <div class="chat-messages" id="chat-messages">
@@ -810,12 +783,6 @@
             <h2>
               Atendimento por pedido
             </h2>
-            <p>
-              Os avisos de atraso e troca de produtos aparecem nesta página. Você pode responder, e a administração verá sua mensagem no painel.
-            </p>
-            <p>
-              Este atendimento é assíncrono: a confeitaria precisa estar com o painel aberto para responder.
-            </p>
             <a class="button button-outline" href="#acompanhar">Acompanhar pedido</a>
           </aside>
         </div>
@@ -847,13 +814,10 @@
             Receba um docinho de alegria ♡
           </h3>
           <p>
-            Projeto acadêmico com API e banco PostgreSQL; Pix apenas simulado, sem cobrança real.
+            Projeto acadêmico com API e banco PostgreSQL.
           </p>
-          <span>🌷 Doce Encanto · projeto full-stack acadêmico</span>
+          <span> Doce Encanto · projeto full-stack acadêmico</span>
         </div>
-      </div>
-      <div class="container footer-bottom">
-        <span>© <span id="current-year"></span> Doce Encanto. Projeto acadêmico.</span><span>Feito com ♡ para encantar</span>
       </div>
       <p><a href="/avaliacao.html">Avaliar o projeto: pesquisa anônima para testes acadêmicos</a></p>
     </footer>

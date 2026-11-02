@@ -136,25 +136,25 @@
     // Opções usadas para montar um cupcake.
     const BUILD = {
         massa: [
-            { id: 'baunilha', name: 'Baunilha', emoji: '🌼', extra: 0 },
-            { id: 'chocolate', name: 'Chocolate', emoji: '🍫', extra: 100 },
-            { id: 'red', name: 'Red velvet', emoji: '❤️', extra: 200 }
+            { id: 'baunilha', name: 'Baunilha', extra: 0 },
+            { id: 'chocolate', name: 'Chocolate', extra: 100 },
+            { id: 'red', name: 'Red velvet',  extra: 200 }
         ],
         recheio: [
-            { id: 'doce-leite', name: 'Doce de leite', emoji: '🍮', extra: 0 },
-            { id: 'brigadeiro', name: 'Brigadeiro', emoji: '🍫', extra: 200 },
-            { id: 'avela', name: 'Creme de avelã', emoji: '🌰', extra: 300 },
-            { id: 'morango', name: 'Morango', emoji: '🍓', extra: 200 }
+            { id: 'doce-leite', name: 'Doce de leite', extra: 0 },
+            { id: 'brigadeiro', name: 'Brigadeiro',  extra: 200 },
+            { id: 'avela', name: 'Creme de avelã',  extra: 300 },
+            { id: 'morango', name: 'Morango',  extra: 200 }
         ],
         cobertura: [
-            { id: 'rosa', name: 'Chantilly rosa', emoji: '💗', extra: 0, image: 'morango' },
-            { id: 'pistache', name: 'Pistache', emoji: '🌿', extra: 300, image: 'pistache' },
-            { id: 'chocolate', name: 'Chocolate', emoji: '🍫', extra: 200, image: 'chocolate-belga' },
-            { id: 'tropical', name: 'Maracujá', emoji: '🍊', extra: 200, image: 'maracuja' },
-            { id: 'baunilha', name: 'Coco', emoji: '🥥', extra: 0, image: 'coco' },
-            { id: 'blueberry', name: 'Mirtilo', emoji: '🫐', extra: 300, image: 'mirtilo' },
-            { id: 'framboesa', name: 'Framboesa', emoji: '🍓', extra: 300, image: 'framboesa' },
-            { id: 'limao', name: 'Limão', emoji: '🍋', extra: 100, image: 'limao' }
+            { id: 'rosa', name: 'Chantilly rosa', extra: 0, image: 'morango' },
+            { id: 'pistache', name: 'Pistache', extra: 300, image: 'pistache' },
+            { id: 'chocolate', name: 'Chocolate',  extra: 200, image: 'chocolate-belga' },
+            { id: 'tropical', name: 'Maracujá',  extra: 200, image: 'maracuja' },
+            { id: 'baunilha', name: 'Coco', extra: 0, image: 'coco' },
+            { id: 'blueberry', name: 'Mirtilo', extra: 300, image: 'mirtilo' },
+            { id: 'framboesa', name: 'Framboesa',  extra: 300, image: 'framboesa' },
+            { id: 'limao', name: 'Limão', extra: 100, image: 'limao' }
         ]
     };
     // Etapas exibidas no acompanhamento do pedido.
@@ -314,7 +314,7 @@
             await api(`/pedidos/${encodeURIComponent(chatOrderId)}/mensagens`, 'POST', { mensagem: message });
             field.value = '';
             await loadCustomerConversation();
-            toast('Resposta enviada à confeitaria! 💗');
+            toast('Resposta enviada à confeitaria!');
         }
         catch (error) {
             toast(error.message);
@@ -881,9 +881,9 @@
     function chatToggle() { location.hash = '#mensagens'; }
     function answerChat(key) {
         const responses = {
-            pedido: ['Onde está meu pedido?', 'Para testar o acompanhamento, clique em “Acompanhar pedido” no menu. Lá você pode simular cada etapa. 📦'],
-            sabores: ['Quais são os sabores?', 'Temos Pistachoco, Red Velvet, Kinder Bliss e muitos outros. Veja o catálogo e encontre o seu favorito! 🧁'],
-            cupom: ['Tem algum cupom?', 'Sim! Use DOCE10 na primeira compra demonstrativa para ganhar 10% de desconto. 💗']
+            pedido: ['Onde está meu pedido?', 'Para testar o acompanhamento, clique em “Acompanhar pedido” no menu. Lá você pode simular cada etapa. '],
+            sabores: ['Quais são os sabores?', 'Temos Pistachoco, Red Velvet, Kinder Bliss e muitos outros. Veja o catálogo e encontre o seu favorito! '],
+            cupom: ['Tem algum cupom?', 'Sim! Use DOCE10 na primeira compra demonstrativa para ganhar 10% de desconto. ']
         };
         const pair = responses[key];
         if (!pair)
