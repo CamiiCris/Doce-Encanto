@@ -543,7 +543,7 @@
     function toast(message) { const node = el('toast'); node.textContent = message; node.classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(() => node.classList.remove('show'), 2700); }
     function renderBuilder() {
         Object.keys(BUILD).forEach(key => {
-            el('choice-' + key).innerHTML = BUILD[key].map(item => `<button class="choice ${builder[key] === item.id ? 'selected' : ''}" data-build-key="${key}" data-build-value="${item.id}" aria-pressed="${builder[key] === item.id}"><span class="choice-emoji">${item.emoji}</span><strong>${escapeHtml(item.name)}</strong><small>${item.extra ? '+ ' + money(item.extra) : 'Incluso'}</small></button>`).join('');
+            el('choice-' + key).innerHTML = BUILD[key].map(item => `<button class="choice ${builder[key] === item.id ? 'selected' : ''}" data-build-key="${key}" data-build-value="${item.id}" aria-pressed="${builder[key] === item.id}"><strong>${escapeHtml(item.name)}</strong><small>${item.extra ? '+ ' + money(item.extra) : 'Incluso'}</small></button>`).join('');
         });
         const selected = Object.fromEntries(Object.keys(BUILD).map(key => [key, BUILD[key].find(x => x.id === builder[key])]));
         const price = 1490 + selected.massa.extra + selected.recheio.extra + selected.cobertura.extra;
