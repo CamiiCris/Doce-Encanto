@@ -84,18 +84,34 @@ function priceCart(items, catalog, coupon = null) {
 function validateAddress(body) {
     if (!body || typeof body !== 'object')
         fail('Endereço obrigatório.');
-    const str = (key, max) => String(body[key] || '').trim().slice(0, max + 1);
+
+    const str = (key, max) =>
+        String(body[key] || '').trim().slice(0, max + 1);
+
+    const cepDigitado = String(body.cep || '').replace(/\D/g, '');
+
     const address = {
         logradouro: str('logradouro', 150),
         numero: str('numero', 15),
         complemento: str('complemento', 80),
         bairro: str('bairro', 80),
-        cidade: str('cidade', 80),
-        uf: str('uf', 2).toUpperCase(),
-        cep: String(body.cep || '').replace(/\D/g, '')
+        cidade: str('cidade', 80) || 'Não informada',
+        uf: str('uf', 2).toUpperCase() || 'NI',
+        cep: cepDigitado.length === 8 ? cepDigitado : '00000000'
     };
-    if (!address.logradouro || address.logradouro.length > 150 || !address.numero || address.numero.length > 15 || !address.bairro || address.bairro.length > 80 || !address.cidade || address.cidade.length > 80 || address.complemento.length > 80 || !/^[A-Z]{2}$/.test(address.uf) || !/^[0-9]{8}$/.test(address.cep))
-        fail('Preencha um endereço válido, incluindo UF e CEP.');
+
+    if (
+        !address.logradouro ||
+        !address.numero ||
+        !address.bairro ||
+        address.logradouro.length > 150 ||
+        address.numero.length > 15 ||
+        address.bairro.length > 80 ||
+        address.complemento.length > 80
+    ) {
+        fail('Informe rua, número e bairro para registrar o pedido.');
+    }
+
     return address;
 }
 const hashToken = token => createHash('sha256').update(token).digest('hex');

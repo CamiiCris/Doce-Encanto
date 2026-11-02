@@ -1165,6 +1165,34 @@
     });
     el('apply-coupon').addEventListener('click', applyCoupon);
     el('checkout-form').addEventListener('submit', checkout);
+    const telefoneInput = document.querySelector('[name="telefone"]');
+    const cepInput = document.querySelector('[name="cep"]');
+
+    telefoneInput.addEventListener('input', () => {
+        const numero = telefoneInput.value.replace(/\D/g, '').slice(0, 11);
+
+        if (numero.length <= 2) {
+            telefoneInput.value = numero ? `(${numero}` : '';
+        } else if (numero.length <= 10) {
+            const parte = numero.slice(2);
+            telefoneInput.value = `(${numero.slice(0, 2)}) ${parte.slice(0, 4)}`;
+
+            if (parte.length > 4) {
+                telefoneInput.value += `-${parte.slice(4)}`;
+            }
+        } else {
+            telefoneInput.value =
+                `(${numero.slice(0, 2)}) ${numero.slice(2, 7)}-${numero.slice(7)}`;
+        }
+    });
+
+    cepInput.addEventListener('input', () => {
+        const numero = cepInput.value.replace(/\D/g, '').slice(0, 8);
+
+        cepInput.value = numero.length > 5
+            ? `${numero.slice(0, 5)}-${numero.slice(5)}`
+            : numero;
+    });
     el('pix-copy-button').addEventListener('click', copyDemoPix);
     el('pix-confirm-button').addEventListener('click', confirmDemoPix);
     document.addEventListener('click', event => {

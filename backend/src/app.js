@@ -204,9 +204,9 @@ app.post('/api/checkout/cotacao', asyncRoute(async (req, res) => {
 app.post('/api/pedidos', requireAuth, requireClient, asyncRoute(async (req, res) => {
     const items = validateItems(req.body?.items);
     const address = validateAddress(req.body?.endereco);
-    const phone = String(req.body?.telefone || '').replace(/\D/g, '');
-    if (!/^[0-9]{10,11}$/.test(phone))
-        fail('Informe um telefone com DDD válido.');
+    const phone = String(req.body?.telefone || '')
+        .replace(/\D/g, '')
+        .slice(0, 20);
     const method = req.body?.metodoPagamento;
     if (!['PIX', 'CARTAO'].includes(method))
         fail('Selecione Pix ou cartão para registrar a intenção de pagamento.');
