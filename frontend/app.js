@@ -939,7 +939,7 @@
             button.disabled = false;
         }
     }
-    // Carrossel manual: mantém todos os seis banners HD clicáveis e acessíveis.
+    // Carrossel manual
     let currentSlide = 0;
     const slides = [...document.querySelectorAll('.carousel-slide')];
     const carouselDots = el('carousel-dots');
@@ -1181,7 +1181,11 @@
         }
     });
     window.addEventListener('hashchange', route);
-    el('current-year').textContent = new Date().getFullYear();
+        const yearElement = el('current-year');
+
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
     renderProducts();
     renderBuilder();
     renderCart();
