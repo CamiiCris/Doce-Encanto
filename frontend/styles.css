@@ -4387,3 +4387,56 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {
   .tracking-stage:nth-child(3):before { display: none; }
   .tracking-actions .button { flex: 1 1 135px; }
 }
+
+/* Ajustes simples solicitados nas avaliações dos usuários. */
+.checkout-note {
+  margin: 14px 0 0;
+  padding: 11px 13px;
+  border-left: 3px solid #b66d83;
+  border-radius: 8px;
+  background: #fff7f7;
+  color: #805d68;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.order-mini .order-cancel-request {
+  display: block;
+  margin-left: auto;
+  padding: 7px 10px;
+  border: 1px solid #e8cbd3;
+  border-radius: 999px;
+  background: #fff8f8;
+  color: #8d4b5d;
+  cursor: pointer;
+}
+.order-mini .order-cancel-request:hover {
+  background: #fbe9ed;
+}
+
+.tracking-stage.completed .stage-dot {
+  border-color: #a76274;
+  background: #a76274;
+  color: #fff;
+}
+.tracking-stage.current .stage-dot {
+  border: 2px solid #a76274;
+  background: #fff0f3;
+  color: #8f4d62;
+  box-shadow: 0 0 0 4px #f7e5ea;
+}
+.tracking-stage.current strong {
+  color: #8f4d62;
+  font-weight: 800;
+}
+.tracking-stage.current small {
+  color: #9b526b;
+  font-weight: 700;
+}
+.tracking-stage.future {
+  opacity: .68;
+}
+.tracking-stage.future .stage-dot {
+  border-style: dashed;
+}
+

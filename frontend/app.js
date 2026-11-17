@@ -761,6 +761,14 @@
         }
     };
     function mapSvg() { return `<svg viewBox="0 0 720 225" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Mapa ilustrativo do percurso da entrega"><rect width="720" height="225" fill="#f2ece3"/><path d="M0 18 720 181M-18 97 735 80M42 0 170 225M218 0 345 225M390 0 520 225M590 0 718 225" stroke="#fffdfa" stroke-width="24" fill="none"/><path d="M0 18 720 181M-18 97 735 80M42 0 170 225M218 0 345 225M390 0 520 225M590 0 718 225" stroke="#e5d7ce" stroke-width="1.6" fill="none"/><g fill="#d7e4d1"><rect x="32" y="128" width="90" height="74" rx="10"/><rect x="324" y="15" width="93" height="48" rx="10"/><rect x="515" y="120" width="80" height="56" rx="10"/></g><path d="M112 165 215 127 313 156 388 108 483 122 562 65" stroke="#b66d83" stroke-width="6" stroke-dasharray="8 9" fill="none" stroke-linecap="round"/><circle cx="112" cy="165" r="12" fill="#fff" stroke="#b66d83" stroke-width="5"/><path d="M552 45c0-18 25-18 25 0 0 12-12.5 25-12.5 25S552 57 552 45Z" fill="#8f4d62"/><circle cx="564.5" cy="43" r="5" fill="#fff"/></svg>`; }
+    function renderTrackingStages(currentIndex) {
+        return `<div class="tracking-stages" aria-label="Etapas do pedido">${STAGES.map((stage, index) => {
+            const state = index < currentIndex ? 'completed' : index === currentIndex ? 'current' : 'future';
+            const label = state === 'completed' ? 'Concluída' : state === 'current' ? 'Etapa atual' : 'Próxima etapa';
+            const stageIcon = state === 'completed' ? 'i-check' : stage.icon;
+            return `<div class="tracking-stage ${state}" ${state === 'current' ? 'aria-current="step"' : ''}><div class="stage-dot">${icon(stageIcon)}</div><strong>${stage.title}</strong><small>${label}</small></div>`;
+        }).join('')}</div>`;
+    }
     function renderTracking() {
         const order = orders.find(o => o.id === selectedOrderId) || orders[0];
         el('tracking-number').textContent = order ? `Pedido #${order.id}` : 'Ainda não há pedidos';
@@ -787,12 +795,12 @@
             const index = ({ AGUARDANDO_PAGAMENTO: -1, CONFIRMADO: 0, ACEITO: 1, PREPARANDO: 2, PRONTO_RETIRADA: 3, EM_ENTREGA: 4, ENTREGUE: 5 })[order.status] ?? -1;
             const hasNotices = Boolean(order.avisos?.length);
             const steps = order.status === 'CANCELADO' ? `<div class="tracking-info">Encomenda cancelada pela confeitaria. Confira o aviso e o motivo abaixo.</div>` :
-                `<div class="tracking-stages">${STAGES.map((s, i) => `<div class="tracking-stage ${i <= index ? 'completed' : ''}"><div class="stage-dot">${icon(i <= index ? 'i-check' : s.icon)}</div><strong>${s.title}</strong><small>${i <= index ? 'Etapa registrada' : 'Aguardando'}</small></div>`).join('')}</div>`;
+                renderTrackingStages(index);
             el('tracking-body').innerHTML = `<div class="tracking-info" style="margin:24px 0"><strong>${escapeHtml(current)} ♡</strong><br>Este status foi consultado diretamente no PostgreSQL. ${order.status === 'AGUARDANDO_PAGAMENTO' ? 'Aguardando confirmação do pagamento de demonstração.' : 'A confeitaria atualiza o preparo e o envio; apenas você confirma o recebimento.'}<br><small>Criado em ${dateOf(order.createdAt)} · total ${money(order.total)}</small></div>${steps}${hasNotices ? `<p class="tracking-info">A confeitaria enviou um comunicado. <button type="button" class="button button-outline" data-conversa-pedido="${escapeHtml(order.id)}">Ler e responder nas Mensagens</button></p>` : ''}<div class="tracking-actions"><p>Projeto acadêmico: Pix de demonstração, sem transferência bancária. Entrega e mapa não são reais.</p>${order.status === 'EM_ENTREGA' ? `<button type="button" class="button button-primary" data-confirm-receipt="${escapeHtml(order.id)}">Confirmar que recebi meu pedido</button>` : ''}${order.status === 'AGUARDANDO_PAGAMENTO' && order.metodoPagamento === 'PIX' ? `<button type="button" class="button button-outline" data-pix-order="${escapeHtml(order.id)}">◆ Ver Pix de teste</button>` : ''}<button type="button" id="refresh-tracking" class="button button-primary">↻ Atualizar andamento</button></div>`;
             return;
         }
         const index = Math.max(0, Math.min(5, order.stage));
-        el('tracking-body').innerHTML = `<div class="tracking-map">${mapSvg()}<span class="map-marker">${STAGES[index].title}</span><span class="map-badge">Mapa ilustrativo · sem localização real</span></div><div class="tracking-stages">${STAGES.map((s, i) => `<div class="tracking-stage ${i <= index ? 'completed' : ''}"><div class="stage-dot">${icon(i <= index ? 'i-check' : s.icon)}</div><strong>${s.title}</strong><small>${i <= index ? 'Etapa concluída' : 'Aguardando'}</small></div>`).join('')}</div><div class="tracking-info"><strong>${STAGES[index].title} ♡</strong><br>${STAGES[index].detail}<br><small>Pedido criado em ${dateOf(order.createdAt)} · valor ${money(order.total)}</small></div><div class="tracking-actions"><p>Experimente o fluxo: avance o status manualmente para estudar o comportamento da interface.</p>${index < 5 ? `<button class="button button-primary" id="advance-stage">Simular próxima etapa ${icon('i-arrow')}</button>` : `<span class="demo-label">Simulação concluída ✓</span>`}</div>`;
+        el('tracking-body').innerHTML = `<div class="tracking-map">${mapSvg()}<span class="map-marker">${STAGES[index].title}</span><span class="map-badge">Mapa ilustrativo · sem localização real</span></div>${renderTrackingStages(index)}<div class="tracking-info"><strong>${STAGES[index].title} ♡</strong><br>${STAGES[index].detail}<br><small>Pedido criado em ${dateOf(order.createdAt)} · valor ${money(order.total)}</small></div><div class="tracking-actions"><p>Experimente o fluxo: avance o status manualmente para estudar o comportamento da interface.</p>${index < 5 ? `<button class="button button-primary" id="advance-stage">Simular próxima etapa ${icon('i-arrow')}</button>` : `<span class="demo-label">Simulação concluída ✓</span>`}</div>`;
     }
     setInterval(() => {
         if (currentUser?.papel === 'CLIENTE' && ['#conta', '#acompanhar', '#mensagens'].includes(location.hash))
@@ -815,7 +823,7 @@
         el('account-demo-profile').hidden = !currentUser;
         el('account-simulated-email').textContent = currentUser ? currentUser.email : '';
         el('admin-profile-link').hidden = !(currentUser?.papel === 'ADMIN');
-        el('account-orders').innerHTML = currentUser?.papel === 'ADMIN' ? `<div class="empty-orders">📋<p>Você está conectado como administrador. A gestão de todos os pedidos fica em uma área separada.</p><a class="button button-primary" href="/admin.html">Abrir painel administrativo →</a></div>` : orders.length ? orders.map((o, i) => `<div class="order-mini"><div><strong>#${escapeHtml(o.id)}</strong><small>${dateOf(o.createdAt)} · ${o.items.reduce((s, x) => s + x.qty, 0)} cupcake(s) · ${escapeHtml(({ CONFIRMADO: 'Pedido feito', ACEITO: 'Pedido aceito', PREPARANDO: 'Em preparação', PRONTO_RETIRADA: 'Aguardando motoboy', EM_ENTREGA: 'Indo até você', ENTREGUE: 'Recebido', CANCELADO: 'Cancelado' })[o.status] || o.status)}</small>${o.avisos?.length ? `<small class="notice-label">💌 ${escapeHtml(({ ATRASO: 'Aviso de atraso', FALTA_PRODUTO: 'Produto em falta', CANCELAMENTO: 'Pedido cancelado', PROPOSTA_TROCA: 'Proposta de troca' })[o.avisos[0].tipo] || 'Novo recado')} — clique em Ver andamento</small>` : ''}</div><div><p>${money(o.total)}</p>${o.status === 'AGUARDANDO_PAGAMENTO' && o.metodoPagamento === 'PIX' ? `<button data-pix-order="${escapeHtml(o.id)}">Pagar (simulação) ◆</button>` : ''}<button data-view-order="${i}">Ver andamento →</button></div></div>`).join('') : `<div class="empty-orders">🧁<p>${currentUser ? 'Você ainda não possui pedidos registrados.' : 'Entre na conta para acompanhar seus pedidos.'}</p><a href="#catalogo" data-nav="catalogo" class="button button-outline">Explorar cardápio</a></div>`;
+        el('account-orders').innerHTML = currentUser?.papel === 'ADMIN' ? `<div class="empty-orders">📋<p>Você está conectado como administrador. A gestão de todos os pedidos fica em uma área separada.</p><a class="button button-primary" href="/admin.html">Abrir painel administrativo →</a></div>` : orders.length ? orders.map((o, i) => `<div class="order-mini"><div><strong>#${escapeHtml(o.id)}</strong><small>${dateOf(o.createdAt)} · ${o.items.reduce((s, x) => s + x.qty, 0)} cupcake(s) · ${escapeHtml(({ CONFIRMADO: 'Pedido feito', ACEITO: 'Pedido aceito', PREPARANDO: 'Em preparação', PRONTO_RETIRADA: 'Aguardando motoboy', EM_ENTREGA: 'Indo até você', ENTREGUE: 'Recebido', CANCELADO: 'Cancelado' })[o.status] || o.status)}</small>${o.avisos?.length ? `<small class="notice-label">💌 ${escapeHtml(({ ATRASO: 'Aviso de atraso', FALTA_PRODUTO: 'Produto em falta', CANCELAMENTO: 'Pedido cancelado', PROPOSTA_TROCA: 'Proposta de troca' })[o.avisos[0].tipo] || 'Novo recado')} — clique em Ver andamento</small>` : ''}</div><div><p>${money(o.total)}</p>${o.status === 'AGUARDANDO_PAGAMENTO' && o.metodoPagamento === 'PIX' ? `<button data-pix-order="${escapeHtml(o.id)}">Pagar (simulação) ◆</button>` : ''}<button data-view-order="${i}">Ver andamento →</button>${!['CANCELADO', 'ENTREGUE'].includes(o.status) ? `<button type="button" class="order-cancel-request" data-request-cancel="${escapeHtml(o.id)}">Solicitar cancelamento</button>` : ''}</div></div>`).join('') : `<div class="empty-orders">🧁<p>${currentUser ? 'Você ainda não possui pedidos registrados.' : 'Entre na conta para acompanhar seus pedidos.'}</p><a href="#catalogo" data-nav="catalogo" class="button button-outline">Explorar cardápio</a></div>`;
     }
     function route() {
         const route = location.hash.replace(/^#/, '') || 'inicio';
@@ -1042,6 +1050,23 @@
                 selectedOrderId = orders[idx].id;
             location.hash = '#acompanhar';
             renderTracking();
+            return;
+        }
+        const cancelRequestButton = event.target.closest('[data-request-cancel]');
+        if (cancelRequestButton) {
+            const orderId = cancelRequestButton.dataset.requestCancel;
+            const order = orders.find(item => item.id === orderId);
+            if (!order) {
+                toast('Não foi possível localizar esse pedido.');
+                return;
+            }
+            chatOrderId = orderId;
+            el('chat-reply-text').value = `Olá! Gostaria de solicitar o cancelamento do pedido #${orderId}. Poderiam me orientar?`;
+            location.hash = '#mensagens';
+            renderChatNotices();
+            loadCustomerConversation();
+            el('chat-reply-text').focus();
+            toast('Revise a mensagem e envie para a confeitaria.');
             return;
         }
         const action = event.target.closest('[data-action]');
